@@ -16,3 +16,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/default', function () {
+    return view('UserPage.default');
+});
+
+Route::get('/halaman-utama', function () {
+    return view('UserPage.halamanUtama');
+})->name('home');;
+
+Route::get('/velg', function () {
+    return view('UserPage.velg');
+})->name('velg');
+
+Route::get('/ban', function () {
+    return view('UserPage.ban');
+})->name('ban');
+
+Route::get('/suspensi', function () {
+    return view('UserPage.suspensi');
+})->name('suspensi');
