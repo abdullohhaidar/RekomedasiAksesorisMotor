@@ -96,7 +96,7 @@ https://templatemo.com/tm-568-digimedia
                 </li>
                 <li class="scroll-to-section">
                     <div class="border-first-button">
-                        <a href="#contact">Rekomendasi</a>
+                        <a href="{{ route('rekomendasi') }}">Rekomendasi</a>
                     </div>
                 </li> 
             </ul>        

@@ -36,3 +36,11 @@ Route::get('/ban', function () {
 Route::get('/suspensi', function () {
     return view('UserPage.suspensi');
 })->name('suspensi');
+
+Route::get('/detail', function () {
+    return view('UserPage.detail');
+})->name('detail');
+
+Route::get('/rekomendasi', function () {
+    return view('UserPage.rekomendasi');
+})->name('rekomendasi');

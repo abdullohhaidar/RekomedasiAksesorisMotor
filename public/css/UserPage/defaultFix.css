@@ -1560,7 +1560,7 @@ Free Quote
 }
 
 .free-quote form {
-  background-color: #fff;
+ 
   display: inline-block;
   width: 100%;
   min-height: 80px;
@@ -1592,13 +1592,58 @@ Free Quote
   height: 80px;
   border-top-right-radius: 40px;
   border-bottom-right-radius: 40px;
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
   outline: none;
   border: none;
-  margin-left: 30px;
-  background-color: #726ae3;
-  font-size: 15px;
+  
+  background: linear-gradient(to right, #5b54d1, #726ae3);
+  font-size: 16px;
+  font-weight: bold;
   color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
 }
+
+/* Efek Hover */
+.free-quote form button:hover {
+  background: linear-gradient(to right, #726ae3, #5b54d1);
+  transform: scale(1.05);
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Efek Klik */
+.free-quote form button:active {
+  transform: scale(0.98);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Tambahan Efek Animasi Gradient */
+.free-quote form button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: skewX(-45deg);
+  transition: left 0.5s ease-in-out;
+}
+
+.free-quote form button:hover::before {
+  left: 100%;
+}
+
+
 
 
 /* 
@@ -1783,10 +1828,10 @@ Blog
 }
 
 .blog-post .down-content span.category {
-  font-size: 15px;
+  font-size: 20px;
   color: #fff;
   padding: 8px 12px;
-  background-color: #726ae3;
+  background-color: #050505;
   border-radius: 18px;
   display: inline-block;
 }
@@ -1804,12 +1849,14 @@ Blog
   font-weight: 700;
   color: #2a2a2a;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-bottom: 5px;
   line-height: 30px;
 }
 
 .blog-post .down-content p {
-  margin-bottom: 30px;
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
 
 .blog-post .down-content span.author {
@@ -1829,7 +1876,7 @@ Blog
 }
 
 .blog-posts {
-  margin-left: 30px;
+  margin-left: 50px;
 }
 
 .post-item {
@@ -1848,11 +1895,13 @@ Blog
 
 .post-item .thumb img {
   border-radius: 23px;
+  width: 180px;
+  height: 180px;
   display: inline-block;
 }
 
 .post-item .right-content {
-  padding-top: 20px;
+  padding-top: 10px;
 }
 
 .post-item .right-content span.category {
@@ -1873,11 +1922,10 @@ Blog
 }
 
 .post-item .right-content h4 {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 700;
   color: #2a2a2a;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   line-height: 30px;
 }
 
