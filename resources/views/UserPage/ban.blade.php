@@ -36,13 +36,13 @@
             <div class="col-lg-12">
             <div class="loop owl-carousel">
                 <div class="item">
-                <a href="#">
+                <a href="{{ route('detailBan') }}">
                     <div class="portfolio-item">
                     <div class="thumb">
                     <img src="{{ asset('images/portfolio-01.jpg') }}" alt="">
                     </div>
                     <div class="down-content">
-                    <h4>Website Builder</h4>
+                    <h4>BAN</h4>
                     <span>Marketing</span>
                     </div>
                 </div>
