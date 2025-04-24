@@ -14,13 +14,13 @@
             <div class="col-lg-6 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
             <div class="blog-post">
                 <div class="thumb">
-                <a href="#"><img src="{{ asset('images/velg/Vnd.jpg') }}" alt=""></a>
+                <a href="#"><img src="{{ asset('images/suspension/shockrcb.jpg') }}" alt=""></a>
                 </div>
                 <div class="down-content">
-                <span class="category">Rp. 2.000.000</span>
+                <span class="category">2.850.000</span>
                 <span class="date">12 Febuary 2025</span>
-                <a href="#"><h4>KING SPEED</h4></a>
-                <p>Velg Racing</p>
+                <a href="#"><h4>Racing Boy</h4></a>
+                <p>Shockbreaker Vario 160</p>
                 </div>
             </div>
             </div>
@@ -30,25 +30,25 @@
                 <div class="col-lg-12 mt-3">
                     <div class="post-item">
                     <div class="thumb">
-                        <a href="#"><img src="{{ asset('images/icon/wheel.png') }}" alt=""></a>
+                        <a href="#"><img src="{{ asset('images/icon/shockbreaker.png') }}" alt=""></a>
                     </div>
                     <div class="right-content">
                         
-                        <a href="#"><h4>Size Tire</h4></a>
-                        <p>Front = 185 x 14</p>
-                        <p>Back = 215 x 14</p>
+                        <a href="#"><h4>Size Shockbreaker</h4></a>
+                        <p>Size = 330MM </p>
+                        
                     </div>
                     </div>
                 </div>
                 <div class="col-lg-12 mt-3">
                     <div class="post-item">
                     <div class="thumb">
-                        <a href="#"><img src="{{ asset('images/icon/steel-bar.png') }}" alt=""></a>
+                        <a href="#"><img src="{{ asset('images/icon/motorcycle.png') }}" alt=""></a>
                     </div>
                     <div class="right-content">
                         
-                        <a href="#"><h4>Material</h4></a>
-                        <p>Aluminium Alloy</p>
+                        <a href="#"><h4>Motorcycle Type</h4></a>
+                        <p> Vario Matic 160 cc</p>
                     </div>
                     </div>
                 </div>
@@ -59,8 +59,8 @@
                     </div>
                     <div class="right-content">
                         
-                        <a href="#"><h4>Color Velg</h4></a>
-                        <p>Black, Red, Blue Green</p>
+                        <a href="#"><h4>Color Shockbreaker</h4></a>
+                        <p>Titanium, Red, Black Series</p>
                     </div>
                     </div>
                 </div>
@@ -72,8 +72,8 @@
                     <div class="right-content">
                         
                         <a href="#"><h4>Brand And Model</h4></a>
-                        <p>Brand = KTC Racing</p>
-                        <p>Model = Chronos</p>
+                        <p>Brand = Racing Boy</p>
+                        <p>Model = NVX</p>
                     </div>
                     </div>
                 </div>

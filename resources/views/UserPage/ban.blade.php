@@ -39,11 +39,11 @@
                 <a href="{{ route('detailBan') }}">
                     <div class="portfolio-item">
                     <div class="thumb">
-                    <img src="{{ asset('images/portfolio-01.jpg') }}" alt="">
+                    <img src="{{ asset('images/tire/tireVario.jpg.webp') }}" alt="">
                     </div>
                     <div class="down-content">
-                    <h4>BAN</h4>
-                    <span>Marketing</span>
+                    <h4>Vario 160 Michelin</h4>
+                    <span>Rp. 1.755.000</span>
                     </div>
                 </div>
                 </a>  

@@ -14,13 +14,13 @@
             <div class="col-lg-6 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
             <div class="blog-post">
                 <div class="thumb">
-                <a href="#"><img src="{{ asset('images/velg/Vnd.jpg') }}" alt=""></a>
+                <a href="#"><img src="{{ asset('images/tire/tireVario.jpg.webp') }}" alt=""></a>
                 </div>
                 <div class="down-content">
-                <span class="category">Rp. 2.000.000</span>
+                <span class="category">Rp. 1.755.000</span>
                 <span class="date">12 Febuary 2025</span>
-                <a href="#"><h4>KING SPEED</h4></a>
-                <p>Velg Racing</p>
+                <a href="#"><h4>MICHELIN</h4></a>
+                <p>Tire Vario 160</p>
                 </div>
             </div>
             </div>
@@ -35,32 +35,32 @@
                     <div class="right-content">
                         
                         <a href="#"><h4>Size Tire</h4></a>
-                        <p>Front = 185 x 14</p>
-                        <p>Back = 215 x 14</p>
+                        <p>Front = 100/80-14 </p>
+                        <p>Back = 120/70-14 </p>
                     </div>
                     </div>
                 </div>
                 <div class="col-lg-12 mt-3">
                     <div class="post-item">
                     <div class="thumb">
-                        <a href="#"><img src="{{ asset('images/icon/steel-bar.png') }}" alt=""></a>
+                        <a href="#"><img src="{{ asset('images/icon/tire.png') }}" alt=""></a>
                     </div>
                     <div class="right-content">
                         
-                        <a href="#"><h4>Material</h4></a>
-                        <p>Aluminium Alloy</p>
+                        <a href="#"><h4>Type Tire</h4></a>
+                        <p>Tubeless</p>
                     </div>
                     </div>
                 </div>
                 <div class="col-lg-12 mt-3">
                     <div class="post-item last-post-item">
                     <div class="thumb">
-                        <a href="#"><img src="{{ asset('images/icon/art.png') }}" alt=""></a>
+                        <a href="#"><img src="{{ asset('images/icon/motorcycle.png') }}" alt=""></a>
                     </div>
                     <div class="right-content">
                         
-                        <a href="#"><h4>Color Velg</h4></a>
-                        <p>Black, Red, Blue Green</p>
+                        <a href="#"><h4>Motorcycle Type</h4></a>
+                        <p> Vario Matic 160 cc</p>
                     </div>
                     </div>
                 </div>
@@ -72,8 +72,8 @@
                     <div class="right-content">
                         
                         <a href="#"><h4>Brand And Model</h4></a>
-                        <p>Brand = KTC Racing</p>
-                        <p>Model = Chronos</p>
+                        <p>Brand = Michelin</p>
+                        <p>Model = Pilot Street</p>
                     </div>
                     </div>
                 </div>

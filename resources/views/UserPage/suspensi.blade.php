@@ -39,11 +39,11 @@
                 <a href="{{ route('detailSuspensi') }}">
                     <div class="portfolio-item">
                     <div class="thumb">
-                    <img src="{{ asset('images/portfolio-01.jpg') }}" alt="">
+                    <img src="{{ asset('images/suspension/shockrcb.jpg') }}" alt="">
                     </div>
                     <div class="down-content">
-                    <h4>Suspensi</h4>
-                    <span>Marketing</span>
+                    <h4>Racing Boy Vario 160</h4>
+                    <span>Rp. 2.850.000</span>
                     </div>
                 </div>
                 </a>  

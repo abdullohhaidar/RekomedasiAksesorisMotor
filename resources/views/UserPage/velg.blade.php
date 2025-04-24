@@ -43,7 +43,7 @@
                     </div>
                     <div class="down-content">
                     <h4>Velg RCB</h4>
-                    <span>Rp. 200.000</span>
+                    <span>Rp. 2.000.000</span>
                     </div>
                 </div>
                 </a>  
