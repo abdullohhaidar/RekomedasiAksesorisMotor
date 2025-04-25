@@ -1,112 +1,248 @@
 @extends('AdminPage.defaultFix')
 
 @section('content')
+    <!-- Tambahkan ini di <head> HTML-mu jika belum ada -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <div class="page-header">
-        <h3 class="page-title"> Basic Tables </h3>
-        <nav aria-label="breadcrumb">
-        
-        </nav>
+        <h3 class="page-title"> Tabel Velg </h3>
+        <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#productModalAdd">
+            <i class="fas fa-plus"></i> 
+        </a>
     </div>
     <div class="row">
-        
-    <div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
-        <div class="card-body">
-        <h4 class="card-title">Bordered table</h4>
-        </p>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th> # </th>
-                <th> First name </th>
-                <th> Progress </th>
-                <th> Amount </th>
-                <th> Deadline </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td> 1 </td>
-                <td> Herman Beck </td>
-                <td>
-                <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Daftar Produk</h4>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th> No </th>
+                                <th> Nama </th>
+                                <th> Merk </th>
+                                <th> Harga </th>
+                                <th> Ukuran </th>
+                                <th> Material </th>
+                                <th> Warna </th>
+                                <th> Brand </th>
+                                <th> Model </th>
+                                <th> Aksi </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> 1 </td>
+                                <td> Meja Belajar </td>
+                                <td> IKEA </td>
+                                <td> Rp 750.000 </td>
+                                <td> 120x60cm </td>
+                                <td> Kayu </td>
+                                <td> Coklat </td>
+                                <td> IKEA </td>
+                                <td> Minimalis </td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#productModalEdit"> <i class="fas fa-edit"></i></a>
+                                    <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> 2 </td>
+                                <td> Kursi Gaming </td>
+                                <td> Rexus </td>
+                                <td> Rp 1.250.000 </td>
+                                <td> Standar </td>
+                                <td> Kulit Sintetis </td>
+                                <td> Hitam </td>
+                                <td> Rexus </td>
+                                <td> Racer-X </td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#productModalEdit"> <i class="fas fa-edit"></i></a>
+                                    <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> 3 </td>
+                                <td> Lemari Pakaian </td>
+                                <td> Olympic </td>
+                                <td> Rp 1.000.000 </td>
+                                <td> 3 Pintu </td>
+                                <td> MDF </td>
+                                <td> Putih </td>
+                                <td> Olympic </td>
+                                <td> Classic </td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#productModalEdit"> <i class="fas fa-edit"></i></a>
+                                    <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> 4 </td>
+                                <td> Sofa </td>
+                                <td> Informa </td>
+                                <td> Rp 2.750.000 </td>
+                                <td> 2 Seater </td>
+                                <td> Kain </td>
+                                <td> Abu-abu </td>
+                                <td> Informa </td>
+                                <td> Modern </td>
+                                <td>
+                                    <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#productModalEdit"> <i class="fas fa-edit"></i></a>
+                                    <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                </td>
-                <td> $ 77.99 </td>
-                <td> May 15, 2015 </td>
-            </tr>
-            <tr>
-                <td> 2 </td>
-                <td> Messsy Adam </td>
-                <td>
-                <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                </td>
-                <td> $245.30 </td>
-                <td> July 1, 2015 </td>
-            </tr>
-            <tr>
-                <td> 3 </td>
-                <td> John Richards </td>
-                <td>
-                <div class="progress">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                </td>
-                <td> $138.00 </td>
-                <td> Apr 12, 2015 </td>
-            </tr>
-            <tr>
-                <td> 4 </td>
-                <td> Peter Meggik </td>
-                <td>
-                <div class="progress">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                </td>
-                <td> $ 77.99 </td>
-                <td> May 15, 2015 </td>
-            </tr>
-            <tr>
-                <td> 5 </td>
-                <td> Edward </td>
-                <td>
-                <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                </td>
-                <td> $ 160.25 </td>
-                <td> May 03, 2015 </td>
-            </tr>
-            <tr>
-                <td> 6 </td>
-                <td> John Doe </td>
-                <td>
-                <div class="progress">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                </td>
-                <td> $ 123.21 </td>
-                <td> April 05, 2015 </td>
-            </tr>
-            <tr>
-                <td> 7 </td>
-                <td> Henry Tom </td>
-                <td>
-                <div class="progress">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                </td>
-                <td> $ 150.00 </td>
-                <td> June 16, 2015 </td>
-            </tr>
-            </tbody>
-        </table>
+            </div>
         </div>
     </div>
+
+    <!-- Modal Tambah Produk -->
+    <div class="modal fade" id="productModalAdd" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-4 shadow-sm">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel">Form Produk</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="productForm">
+
+                        <!-- Setiap input diberi style tambahan -->
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="nama" name="nama" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="merk" class="form-label">Merk</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="merk" name="merk" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="harga" class="form-label">Harga</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="harga" name="harga" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="ukuran" class="form-label">Ukuran</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="ukuran" name="ukuran" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="material" class="form-label">Material</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="material" name="material" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="warna" class="form-label">Warna</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="warna" name="warna" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="brand" class="form-label">Brand</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="brand" name="brand" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="model" class="form-label">Model</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="model" name="model" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="model" class="form-label">Gambar</label>
+                            <input type="file" class="form-control border border-secondary rounded-3" id="model" name="model" required>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-success">Simpan</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
     </div>
+
+
+    <!-- Modal Edit Produk -->
+    <div class="modal fade" id="productModalEdit" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-4 shadow-sm">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalLabel">Form Edit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="productForm">
+
+                        <!-- Setiap input diberi style tambahan -->
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="nama" name="nama" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="merk" class="form-label">Merk</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="merk" name="merk" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="harga" class="form-label">Harga</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="harga" name="harga" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="ukuran" class="form-label">Ukuran</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="ukuran" name="ukuran" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="material" class="form-label">Material</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="material" name="material" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="warna" class="form-label">Warna</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="warna" name="warna" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="brand" class="form-label">Brand</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="brand" name="brand" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="model" class="form-label">Model</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="model" name="model" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="model" class="form-label">Gambar</label>
+                            <input type="file" class="form-control border border-secondary rounded-3" id="model" name="model" required>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-success">Simpan</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
         
     <!-- content-wrapper ends -->
     <!-- partial:../../partials/_footer.html -->
@@ -116,4 +252,19 @@
         <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
         </div>
     </footer> 
+
+    <script>
+    (() => {
+        'use strict'
+        const form = document.getElementById('produkForm');
+        form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+        }, false);
+    })();
+    </script>
+
 @endsection
