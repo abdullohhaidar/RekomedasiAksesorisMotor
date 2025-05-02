@@ -31,66 +31,31 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($dataVelg as $index => $velg)
                             <tr>
-                                <td> 1 </td>
-                                <td> Meja Belajar </td>
-                                <td> IKEA </td>
-                                <td> Rp 750.000 </td>
-                                <td> 120x60cm </td>
-                                <td> Kayu </td>
-                                <td> Coklat </td>
-                                <td> IKEA </td>
-                                <td> Minimalis </td>
+                                <td> {{ $index + 1 }} </td>
+                                <td> {{ $velg->nama_velg }} </td>
+                                <td> {{ $velg->merk_velg }} </td>
+                                <td> Rp{{ number_format($velg->harga_velg, 0, ',', '.') }} </td>
+                                <td> {{ $velg->ukuran_velg }} </td>
+                                <td> {{ $velg->material_velg }} </td>
+                                <td> {{ $velg->warna_velg }} </td>
+                                <td> {{ $velg->brand_velg }} </td>
+                                <td> {{ $velg->model_velg }} </td>
                                 <td>
-                                    <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#productModalEdit"> <i class="fas fa-edit"></i></a>
+                                    <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#productModalEdit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    
                                     <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>
+                            
+                            @empty
                             <tr>
-                                <td> 2 </td>
-                                <td> Kursi Gaming </td>
-                                <td> Rexus </td>
-                                <td> Rp 1.250.000 </td>
-                                <td> Standar </td>
-                                <td> Kulit Sintetis </td>
-                                <td> Hitam </td>
-                                <td> Rexus </td>
-                                <td> Racer-X </td>
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#productModalEdit"> <i class="fas fa-edit"></i></a>
-                                    <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                </td>
+                                <td colspan="11" class="text-center">Data tidak tersedia</td>
                             </tr>
-                            <tr>
-                                <td> 3 </td>
-                                <td> Lemari Pakaian </td>
-                                <td> Olympic </td>
-                                <td> Rp 1.000.000 </td>
-                                <td> 3 Pintu </td>
-                                <td> MDF </td>
-                                <td> Putih </td>
-                                <td> Olympic </td>
-                                <td> Classic </td>
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#productModalEdit"> <i class="fas fa-edit"></i></a>
-                                    <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> 4 </td>
-                                <td> Sofa </td>
-                                <td> Informa </td>
-                                <td> Rp 2.750.000 </td>
-                                <td> 2 Seater </td>
-                                <td> Kain </td>
-                                <td> Abu-abu </td>
-                                <td> Informa </td>
-                                <td> Modern </td>
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#productModalEdit"> <i class="fas fa-edit"></i></a>
-                                    <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -104,57 +69,57 @@
             <div class="modal-content rounded-4 shadow-sm">
 
                 <div class="modal-header">
-                    <h5 class="modal-title" id="productModalLabel">Form Produk</h5>
+                    <h5 class="modal-title" id="productModalLabel">Form Produk Velg</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                 </div>
 
                 <div class="modal-body">
-                    <form id="productForm">
+                    <form id="productForm" action="{{ route('velg.input') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
 
-                        <!-- Setiap input diberi style tambahan -->
                         <div class="mb-3">
-                            <label for="nama" class="form-label">Nama Produk</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="nama" name="nama" required>
+                            <label for="nama_velg" class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="nama_velg" name="nama_velg" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="merk" class="form-label">Merk</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="merk" name="merk" required>
+                            <label for="merk_velg" class="form-label">Merk</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="merk_velg" name="merk_velg" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="harga" class="form-label">Harga</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="harga" name="harga" required>
+                            <label for="harga_velg" class="form-label">Harga</label>
+                            <input type="number" class="form-control border border-secondary rounded-3" id="harga_velg" name="harga_velg" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="ukuran" class="form-label">Ukuran</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="ukuran" name="ukuran" required>
+                            <label for="ukuran_velg" class="form-label">Ukuran</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="ukuran_velg" name="ukuran_velg" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="material" class="form-label">Material</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="material" name="material" required>
+                            <label for="material_velg" class="form-label">Material</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="material_velg" name="material_velg" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="warna" class="form-label">Warna</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="warna" name="warna" required>
+                            <label for="warna_velg" class="form-label">Warna</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="warna_velg" name="warna_velg" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="brand" class="form-label">Brand</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="brand" name="brand" required>
+                            <label for="brand_velg" class="form-label">Brand</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="brand_velg" name="brand_velg" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="model" class="form-label">Model</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="model" name="model" required>
+                            <label for="model_velg" class="form-label">Model</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="model_velg" name="model_velg" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="model" class="form-label">Gambar</label>
-                            <input type="file" class="form-control border border-secondary rounded-3" id="model" name="model" required>
+                            <label for="gambar_velg" class="form-label">Gambar</label>
+                            <input type="file" class="form-control border border-secondary rounded-3" id="gambar_velg" name="gambar_velg" accept="image/*" required>
                         </div>
 
                         <div class="text-end">
@@ -168,6 +133,7 @@
             </div>
         </div>
     </div>
+
 
 
     <!-- Modal Edit Produk -->

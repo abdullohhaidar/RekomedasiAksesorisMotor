@@ -1,6 +1,10 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\VelgController;
+use App\Http\Controllers\Admin\BanController;
+use App\Http\Controllers\Admin\SuspensiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,17 +69,29 @@ Route::get('/adminDashboard', function () {
     return view('AdminPage.dashboard');
 })->name('adminDashboard');
 
-Route::get('/adminTableVelg', function () {
-    return view('AdminPage.tableVelg');
-})->name('adminTableVelg');
+// Velg
+// Route::get('/adminTableVelg', function () {
+//     return view('AdminPage.tableVelg');
+// })->name('adminTableVelg');
 
-Route::get('/adminTableBan', function () {
-    return view('AdminPage.tableBan');
-})->name('adminTableBan');
+Route::get('/adminTableVelg', [VelgController::class, 'index'])->name('adminTableVelg');
+Route::post('/velg/input', [VelgController::class, 'store'])->name('velg.input');
 
-Route::get('/adminTableSuspensi', function () {
-    return view('AdminPage.tableSuspensi');
-})->name('adminTableSuspensi');
+// Ban
+// Route::get('/adminTableBan', function () {
+//     return view('AdminPage.tableBan');
+// })->name('adminTableBan');
+
+Route::get('/adminTableBan', [BanController::class, 'index'])->name('adminTableBan');
+Route::post('/ban/input', [BanController::class, 'store'])->name('ban.input');
+
+// Suspensi 
+// Route::get('/adminTableSuspensi', function () {
+//     return view('AdminPage.tableSuspensi');
+// })->name('adminTableSuspensi');
+
+Route::get('/adminTableSuspensi', [SuspensiController::class, 'index'])->name('adminTableSuspensi');
+Route::post('/suspensi/input', [SuspensiController::class, 'store'])->name('suspensi.input');
 
 // Referensi
 Route::get('/adminButtons', function () {
