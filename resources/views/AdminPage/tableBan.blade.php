@@ -35,16 +35,21 @@
                                 <td> {{ $ban->merk_ban }} </td>
                                 <td> Rp{{ number_format($ban->harga_ban, 0, ',', '.') }} </td>
                                 <td> {{ $ban->ukuran_ban }} </td>
-                                <td> {{ $ban->ukuran_ban }} </td>
                                 <td> {{ $ban->tipe_ban }} </td>
                                 <td> {{ $ban->tipe_motor }} </td>
                                 <td> {{ $ban->model_ban }} </td>
                                 <td>
-                                    <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#productModalEdit">
+                                    <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#productModalEdit" onclick="showEditModal({{$ban->id_ban }})">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     
-                                    <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                    <form action="{{ route('ban.destroy', $ban->id_ban) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             
@@ -141,52 +146,66 @@
                 </div>
 
                 <div class="modal-body">
-                    <form id="productForm">
+                    <form id="productForm" action="{{ route('ban.update', $ban->id_ban) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
 
                         <!-- Setiap input diberi style tambahan -->
                         <div class="mb-3">
+                            <input type="hidden" id="edit_id_ban" name="id_ban">
+                        </div>
+
+                        <div class="mb-3">
                             <label for="nama" class="form-label">Nama Produk</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="nama" name="nama" required>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="edit_nama_ban" name="nama_ban" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="merk" class="form-label">Merk</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="merk" name="merk" required>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="edit_merk_ban" name="merk_ban" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="harga" class="form-label">Harga</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="harga" name="harga" required>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="edit_harga_ban" name="harga_ban" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="ukuran" class="form-label">Ukuran</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="ukuran" name="ukuran" required>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="edit_ukuran_ban" name="ukuran_ban" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="material" class="form-label">Material</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="material" name="material" required>
+                            <label for="material" class="form-label">Tipe Motor</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="edit_tipe_ban" name="tipe_ban" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="warna" class="form-label">Warna</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="warna" name="warna" required>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="edit_tipe_motor_ban" name="tipe_motor" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="brand" class="form-label">Brand</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="brand" name="brand" required>
-                        </div>
 
                         <div class="mb-3">
                             <label for="model" class="form-label">Model</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="model" name="model" required>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="edit_model_ban" name="model_ban" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="model" class="form-label">Gambar</label>
-                            <input type="file" class="form-control border border-secondary rounded-3" id="model" name="model" required>
+                            <input type="hidden" class="form-control" id="gambar_ban_lama" name="gambar_ban_lama">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="gambar_ban" class="form-label">Gambar</label>
+                            
+                            <!-- Preview gambar lama -->
+                            <div class="mb-2">
+                                <img id="preview_gambar_ban" src="" alt="Preview Gambar" style="max-height: 120px;">
+                            </div>
+
+                            <!-- Input file -->
+                            <input type="file" class="form-control border border-secondary rounded-3" id="gambar_ban_baru" name="gambar_ban" accept="image/*" >
+                           
                         </div>
 
                         <div class="text-end">
@@ -209,4 +228,37 @@
         <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
         </div>
     </footer> 
+
+    <script>
+    function showEditModal(id) {
+        // Ambil data ban berdasarkan ID via AJAX
+        fetch('/ban/' + id)
+            .then(response => response.json())
+            .then(data => {
+                // Isi form dengan data yang didapat
+                // document.getElementById('productForm').action = '/ban/update/' + data.id;
+                document.getElementById('edit_id_ban').value = data.id_ban;
+                document.getElementById('edit_nama_ban').value = data.nama_ban;
+                document.getElementById('edit_merk_ban').value = data.merk_ban;
+                document.getElementById('edit_harga_ban').value = data.harga_ban;
+                document.getElementById('edit_ukuran_ban').value = data.ukuran_ban;
+                document.getElementById('edit_tipe_ban').value = data.tipe_ban;
+                document.getElementById('edit_tipe_motor_ban').value = data.tipe_motor;
+                document.getElementById('edit_model_ban').value = data.model_ban;
+                document.getElementById('preview_gambar_ban').src = '/storage/images/ban/' + data.gambar_ban;
+                document.getElementById('gambar_ban_lama').value = data.gambar_ban;
+                document.getElementById('gambar_ban_lama_baru').value = data.gambar_ban;
+                   
+                // gambar tidak bisa dipreview langsung dari path (jika perlu, bisa tampilkan di tag <img>)
+                
+                // Tampilkan modal
+                const modalEdit = new bootstrap.Modal(document.getElementById('productModalEdit'));
+                modalEdit.show();
+            })
+            .catch(error => {
+                console.error('Gagal mengambil data:', error);
+            });
+    }
+    </script>
+
 @endsection

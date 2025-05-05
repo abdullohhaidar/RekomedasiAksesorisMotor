@@ -35,16 +35,21 @@
                                 <td> {{ $suspensi->merk_suspensi }} </td>
                                 <td> Rp{{ number_format($suspensi->harga_suspensi, 0, ',', '.') }} </td>
                                 <td> {{ $suspensi->ukuran_suspensi }} </td>
-                                <td> {{ $suspensi->ukuran_suspensi }} </td>
-                                <td> {{ $suspensi->tipe_suspensi }} </td>
                                 <td> {{ $suspensi->tipe_motor }} </td>
+                                <td> {{ $suspensi->warna_suspensi }} </td>
                                 <td> {{ $suspensi->model_suspensi }} </td>
                                 <td>
-                                    <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#productModalEdit">
+                                    <a href="#" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#productModalEdit" onclick="showEditModal({{$suspensi->id_suspensi }})">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     
-                                    <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                    <form action="{{ route('suspensi.destroy', $suspensi->id_suspensi) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus?')">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             
@@ -139,52 +144,67 @@
                 </div>
 
                 <div class="modal-body">
-                    <form id="productForm">
+                    <form id="productForm" action="{{ route('suspensi.update', $suspensi->id_suspensi) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
 
                         <!-- Setiap input diberi style tambahan -->
+
+                        <div class="mb-3">
+                            <input type="hidden" id="edit_id_suspensi" name="id_suspensi">
+                        </div>
+
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Produk</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="nama" name="nama" required>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="edit_nama_suspensi" name="nama_suspensi" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="merk" class="form-label">Merk</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="merk" name="merk" required>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="edit_merk_suspensi" name="merk_suspensi" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="harga" class="form-label">Harga</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="harga" name="harga" required>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="edit_harga_suspensi" name="harga_suspensi" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="ukuran" class="form-label">Ukuran</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="ukuran" name="ukuran" required>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="edit_ukuran_suspensi" name="ukuran_suspensi" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="material" class="form-label">Material</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="material" name="material" required>
+                            <label for="material" class="form-label">Tipe Motor</label>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="edit_tipe_motor_suspensi" name="tipe_motor" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="warna" class="form-label">Warna</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="warna" name="warna" required>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="edit_warna_suspensi" name="warna_suspensi" required>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="brand" class="form-label">Brand</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="brand" name="brand" required>
-                        </div>
 
                         <div class="mb-3">
                             <label for="model" class="form-label">Model</label>
-                            <input type="text" class="form-control border border-secondary rounded-3" id="model" name="model" required>
+                            <input type="text" class="form-control border border-secondary rounded-3" id="edit_model_suspensi" name="model_suspensi" required>
                         </div>
 
                         <div class="mb-3">
-                            <label for="model" class="form-label">Gambar</label>
-                            <input type="file" class="form-control border border-secondary rounded-3" id="model" name="model" required>
+                            <input type="hidden" class="form-control" id="gambar_suspensi_lama" name="gambar_suspensi_lama">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="gambar_suspensi" class="form-label">Gambar</label>
+                            
+                            <!-- Preview gambar lama -->
+                            <div class="mb-2">
+                                <img id="preview_gambar_suspensi" src="" alt="Preview Gambar" style="max-height: 120px;">
+                            </div>
+
+                            <!-- Input file -->
+                            <input type="file" class="form-control border border-secondary rounded-3" id="gambar_suspensi_baru" name="gambar_suspensi" accept="image/*" >
+                           
                         </div>
 
                         <div class="text-end">
@@ -206,5 +226,37 @@
         <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2023 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>. All rights reserved.</span>
         <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
         </div>
-    </footer> 
+    </footer>
+    
+    <script>
+    function showEditModal(id) {
+        // Ambil data suspensi berdasarkan ID via AJAX
+        fetch('/suspensi/' + id)
+            .then(response => response.json())
+            .then(data => {
+                // Isi form dengan data yang didapat
+                // document.getElementById('productForm').action = '/suspensi/update/' + data.id;
+                document.getElementById('edit_id_suspensi').value = data.id_suspensi;
+                document.getElementById('edit_nama_suspensi').value = data.nama_suspensi;
+                document.getElementById('edit_merk_suspensi').value = data.merk_suspensi;
+                document.getElementById('edit_harga_suspensi').value = data.harga_suspensi;
+                document.getElementById('edit_ukuran_suspensi').value = data.ukuran_suspensi;
+                document.getElementById('edit_tipe_motor_suspensi').value = data.tipe_motor;
+                document.getElementById('edit_warna_suspensi').value = data.warna_suspensi;
+                document.getElementById('edit_model_suspensi').value = data.model_suspensi;
+                document.getElementById('preview_gambar_suspensi').src = '/storage/images/suspensi/' + data.gambar_suspensi;
+                document.getElementById('gambar_suspensi_lama').value = data.gambar_suspensi;
+                document.getElementById('gambar_suspensi_lama_baru').value = data.gambar_suspensi;
+                   
+                // gambar tidak bisa dipreview langsung dari path (jika perlu, bisa tampilkan di tag <img>)
+                
+                // Tampilkan modal
+                const modalEdit = new bootstrap.Modal(document.getElementById('productModalEdit'));
+                modalEdit.show();
+            })
+            .catch(error => {
+                console.error('Gagal mengambil data:', error);
+            });
+    }
+    </script>
 @endsection

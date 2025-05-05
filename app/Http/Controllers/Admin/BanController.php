@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Ban;
 use Illuminate\Support\Facades\Storage; 
+use Illuminate\Support\Facades\File;
 
 class BanController extends Controller
 {
@@ -14,6 +15,15 @@ class BanController extends Controller
     {
         $dataBan = Ban::all(); // ambil semua data dari tabel Ban
         return view('AdminPage.tableBan', compact('dataBan'));
+    }
+
+    public function show($id)
+    {
+        // Ambil data ban berdasarkan id
+        $ban = Ban::findOrFail($id);
+
+        // Kembalikan data ke view, misalnya form edit
+        return response()->json($ban);
     }
 
     public function store(Request $request)
@@ -67,20 +77,26 @@ class BanController extends Controller
             'tipe_ban' => 'required|string|max:250',
             'tipe_motor' => 'required|string|max:250',
             'model_ban' => 'required|string|max:250',
-            'gambar_ban' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+            'gambar_ban' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'gambar_ban_lama' => 'nullable|string',
         ]);
 
         // Ambil data lama dari DB
         $ban = Ban::findOrFail($id);
 
-        // Simpan nama gambar yang lama secara default
-        $imageName = $ban->gambar_ban;
-
-        // Jika ada file baru diupload
+        // Proses upload gambar jika ada file baru
         if ($request->hasFile('gambar_ban')) {
             $file = $request->file('gambar_ban');
-            $imageName = time() . '_' . preg_replace('/\s+/', '_', $request->nama_ban) . '.' . $file->extension();
-            $file->storeAs('ban', $imageName, 'public');
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $request->nama_ban) . '.' . $file->extension();
+            $file->storeAs('images/ban', $filename, 'public');
+
+            // Hapus file lama jika ada
+            if ($request->gambar_ban_lama && File::exists(public_path('images/ban/' . $request->gambar_ban_lama))) {
+                File::delete(public_path('images/ban/' . $request->gambar_ban_lama));
+            }
+        } else {
+            // Jika tidak upload gambar baru, gunakan gambar lama
+            $filename = $request->gambar_ban_lama;
         }
 
         // Update data
@@ -92,7 +108,7 @@ class BanController extends Controller
             'tipe_ban' => $request->tipe_ban,
             'tipe_motor' => $request->tipe_motor,
             'brand_ban' => $request->brand_ban,
-            'gambar_ban' => $imageName
+            'gambar_ban' => $filename
         ]);
 
         return redirect()->back()->with('success', 'Data ban berhasil diperbarui.');
@@ -103,8 +119,8 @@ class BanController extends Controller
         $ban = Ban::findOrFail($id);
 
         // Hapus gambar dari storage jika ada
-        if ($ban->gambar_ban && Storage::disk('public')->exists('ban/' . $ban->gambar_ban)) {
-            Storage::disk('public')->delete('ban/' . $ban->gambar_ban);
+        if ($ban->gambar_ban && Storage::disk('public')->exists('images/ban/' . $ban->gambar_ban)) {
+            Storage::disk('public')->delete('images/ban/' . $ban->gambar_ban);
         }
 
         // Hapus data dari database

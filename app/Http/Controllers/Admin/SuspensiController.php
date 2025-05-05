@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage; 
 use App\Models\Suspensi;
+use Illuminate\Support\Facades\File;
 
 class SuspensiController extends Controller
 {
@@ -14,6 +15,15 @@ class SuspensiController extends Controller
     {
         $dataSuspensi = Suspensi::all(); // ambil semua data dari tabel Suspensi
         return view('AdminPage.tableSuspensi', compact('dataSuspensi'));
+    }
+
+    public function show($id)
+    {
+        // Ambil data suspensi berdasarkan id
+        $suspensi = Suspensi::findOrFail($id);
+
+        // Kembalikan data ke view, misalnya form edit
+        return response()->json($suspensi);
     }
 
     public function store(Request $request)
@@ -67,20 +77,27 @@ class SuspensiController extends Controller
             'tipe_motor' => 'required|string|max:250',
             'warna_suspensi' => 'required|string|max:250',
             'model_suspensi' => 'required|string|max:250',
-            'gambar_suspensi' => 'nullable|image|mimes:jpg,jpeg,png,webp'
+            'gambar_suspensi' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'gambar_suspensi_lama' => 'nullable|string',
         ]);
 
         // Ambil data lama dari DB
         $suspensi = Suspensi::findOrFail($id);
 
         // Simpan nama gambar yang lama secara default
-        $imageName = $suspensi->gambar_suspensi;
-
-        // Jika ada file baru diupload
+        // Proses upload gambar jika ada file baru
         if ($request->hasFile('gambar_suspensi')) {
             $file = $request->file('gambar_suspensi');
-            $imageName = time() . '_' . preg_replace('/\s+/', '_', $request->nama_suspensi) . '.' . $file->extension();
-            $file->storeAs('suspensi', $imageName, 'public');
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $request->nama_suspensi) . '.' . $file->extension();
+            $file->storeAs('images/suspensi', $filename, 'public');
+
+            // Hapus file lama jika ada
+            if ($request->gambar_suspensi_lama && File::exists(public_path('images/suspensi/' . $request->gambar_suspensi_lama))) {
+                File::delete(public_path('images/suspensi/' . $request->gambar_suspensi_lama));
+            }
+        } else {
+            // Jika tidak upload gambar baru, gunakan gambar lama
+            $filename = $request->gambar_suspensi_lama;
         }
 
         // Update data
@@ -92,7 +109,7 @@ class SuspensiController extends Controller
             'tipe_motor' => $request->tipe_motor,
             'warna_suspensi' => $request->warna_suspensi,
             'model_suspensi' => $request->model_suspensi,
-            'gambar_suspensi' => $imageName
+            'gambar_suspensi' => $filename
         ]);
 
         return redirect()->back()->with('success', 'Data suspensi berhasil diperbarui.');
@@ -103,8 +120,8 @@ class SuspensiController extends Controller
         $suspensi = Suspensi::findOrFail($id);
 
         // Hapus gambar dari storage jika ada
-        if ($suspensi->gambar_suspensi && Storage::disk('public')->exists('suspensi/' . $suspensi->gambar_suspensi)) {
-            Storage::disk('public')->delete('suspensi/' . $suspensi->gambar_suspensi);
+        if ($suspensi->gambar_suspensi && Storage::disk('public')->exists('images/suspensi/' . $suspensi->gambar_suspensi)) {
+            Storage::disk('public')->delete('images/suspensi/' . $suspensi->gambar_suspensi);
         }
 
         // Hapus data dari database

@@ -76,6 +76,9 @@ Route::get('/adminDashboard', function () {
 
 Route::get('/adminTableVelg', [VelgController::class, 'index'])->name('adminTableVelg');
 Route::post('/velg/input', [VelgController::class, 'store'])->name('velg.input');
+Route::get('/velg/{id}', [VelgController::class, 'show'])->name('velg.show');
+Route::put('/velg/update/{id}', [VelgController::class, 'update'])->name('velg.update');
+Route::delete('/velg/{id}', [VelgController::class, 'destroy'])->name('velg.destroy');
 
 // Ban
 // Route::get('/adminTableBan', function () {
@@ -84,6 +87,9 @@ Route::post('/velg/input', [VelgController::class, 'store'])->name('velg.input')
 
 Route::get('/adminTableBan', [BanController::class, 'index'])->name('adminTableBan');
 Route::post('/ban/input', [BanController::class, 'store'])->name('ban.input');
+Route::get('/ban/{id}', [BanController::class, 'show'])->name('ban.show');
+Route::put('/ban/update/{id}', [BanController::class, 'update'])->name('ban.update');
+Route::delete('/ban/{id}', [BanController::class, 'destroy'])->name('ban.destroy');
 
 // Suspensi 
 // Route::get('/adminTableSuspensi', function () {
@@ -92,6 +98,9 @@ Route::post('/ban/input', [BanController::class, 'store'])->name('ban.input');
 
 Route::get('/adminTableSuspensi', [SuspensiController::class, 'index'])->name('adminTableSuspensi');
 Route::post('/suspensi/input', [SuspensiController::class, 'store'])->name('suspensi.input');
+Route::get('/suspensi/{id}', [SuspensiController::class, 'show'])->name('suspensi.show');
+Route::put('/suspensi/update/{id}', [SuspensiController::class, 'update'])->name('suspensi.update');
+Route::delete('/suspensi/{id}', [SuspensiController::class, 'destroy'])->name('suspensi.destroy');
 
 // Referensi
 Route::get('/adminButtons', function () {

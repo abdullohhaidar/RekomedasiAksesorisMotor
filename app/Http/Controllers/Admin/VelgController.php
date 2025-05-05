@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Velg;
 use Illuminate\Support\Facades\Storage; 
+use Illuminate\Support\Facades\File;
 
 class VelgController extends Controller
 {
@@ -16,6 +17,16 @@ class VelgController extends Controller
         $dataVelg = Velg::all(); // ambil semua data dari tabel velg
         return view('AdminPage.tableVelg', compact('dataVelg'));
     }
+
+    public function show($id)
+    {
+        // Ambil data velg berdasarkan id
+        $velg = Velg::findOrFail($id);
+
+        // Kembalikan data ke view, misalnya form edit
+        return response()->json($velg);
+    }
+
 
     public function store(Request $request)
     {
@@ -29,7 +40,7 @@ class VelgController extends Controller
             'warna_velg' => 'required|string|max:250',
             'brand_velg' => 'required|string|max:250',
             'model_velg' => 'required|string|max:250',
-            'gambar_velg' => 'nullable|image|mimes:jpg,jpeg,png'
+            'gambar_velg' => 'nullable|image|mimes:jpg,jpeg,png,webp'
         ]);
 
         // Default nama gambar jika tidak ada upload
@@ -71,21 +82,28 @@ class VelgController extends Controller
             'warna_velg' => 'required|string|max:250',
             'brand_velg' => 'required|string|max:250',
             'model_velg' => 'required|string|max:250',
-            'gambar_velg' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+            'gambar_velg' => 'nullable|image|mimes:jpg,jpeg,png,,webp',
+            'gambar_velg_lama' => 'nullable|string',
         ]);
 
         // Ambil data lama dari DB
         $velg = Velg::findOrFail($id);
 
-        // Simpan nama gambar yang lama secara default
-        $imageName = $velg->gambar_velg;
-
-        // Jika ada file baru diupload
+        // Proses upload gambar jika ada file baru
         if ($request->hasFile('gambar_velg')) {
             $file = $request->file('gambar_velg');
-            $imageName = time() . '_' . preg_replace('/\s+/', '_', $request->nama_velg) . '.' . $file->extension();
-            $file->storeAs('velg', $imageName, 'public');
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $request->nama_velg) . '.' . $file->extension();
+            $file->storeAs('images/velg', $filename, 'public');
+
+            // Hapus file lama jika ada
+            if ($request->gambar_velg_lama && File::exists(public_path('images/velg/' . $request->gambar_velg_lama))) {
+                File::delete(public_path('images/velg/' . $request->gambar_velg_lama));
+            }
+        } else {
+            // Jika tidak upload gambar baru, gunakan gambar lama
+            $filename = $request->gambar_velg_lama;
         }
+
 
         // Update data
         $velg->update([
@@ -97,10 +115,11 @@ class VelgController extends Controller
             'warna_velg' => $request->warna_velg,
             'brand_velg' => $request->brand_velg,
             'model_velg' => $request->model_velg,
-            'gambar_velg' => $imageName
+            'gambar_velg' => $filename
         ]);
 
         return redirect()->back()->with('success', 'Data velg berhasil diperbarui.');
+        // return response()->json($request);
     }
 
     public function destroy($id)
@@ -108,8 +127,8 @@ class VelgController extends Controller
         $velg = Velg::findOrFail($id);
 
         // Hapus gambar dari storage jika ada
-        if ($velg->gambar_velg && Storage::disk('public')->exists('velg/' . $velg->gambar_velg)) {
-            Storage::disk('public')->delete('velg/' . $velg->gambar_velg);
+        if ($velg->gambar_velg && Storage::disk('public')->exists('images/velg/' . $velg->gambar_velg)) {
+            Storage::disk('public')->delete('images/velg/' . $velg->gambar_velg);
         }
 
         // Hapus data dari database
