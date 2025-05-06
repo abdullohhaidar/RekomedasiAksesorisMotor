@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\VelgController;
 use App\Http\Controllers\Admin\BanController;
 use App\Http\Controllers\Admin\SuspensiController;
+use App\Http\Controllers\EtalaseBanController;
+use App\Http\Controllers\EtalaseSuspensiController;
+use App\Http\Controllers\EtalaseVelgController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,20 +30,27 @@ Route::get('/', function () {
     return view('UserPage.halamanUtama');
 })->name('home');;
 
-Route::get('/velg', function () {
-    return view('UserPage.velg');
-})->name('velg');
+// Route::get('/velg', function () {
+//     return view('UserPage.velg');
+// })->name('velg');
+Route::get('/etalase/velg', [EtalaseVelgController::class, 'index'])->name('etalaseVelg');
+Route::get('/etalase/velg/detail/{id}', [EtalaseVelgController::class, 'show'])->name('detailEVelg');
 
-Route::get('/ban', function () {
-    return view('UserPage.ban');
-})->name('ban');
 
-Route::get('/suspensi', function () {
-    return view('UserPage.suspensi');
-})->name('suspensi');
+// Route::get('/ban', function () {
+//     return view('UserPage.ban');
+// })->name('ban');
+Route::get('/etalase/ban', [EtalaseBanController::class, 'index'])->name('etalaseBan');
+Route::get('/etalase/ban/detail/{id}', [EtalaseBanController::class, 'show'])->name('detailEBan');
 
-Route::get('/detail', function () {
-    return view('UserPage.detail');
+// Route::get('/suspensi', function () {
+//     return view('UserPage.suspensi');
+// })->name('suspensi');
+Route::get('/etalase/suspensi', [EtalaseSuspensiController::class, 'index'])->name('etalaseSuspensi');
+Route::get('/etalase/suspensi/detail/{id}', [EtalaseSuspensiController::class, 'show'])->name('detailESuspensi');
+
+Route::get('/detailVelg', function () {
+    return view('UserPage.detailVelg');
 })->name('detail');
 
 Route::get('/detailBan', function () {

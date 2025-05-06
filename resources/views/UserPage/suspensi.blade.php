@@ -34,75 +34,26 @@
         <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s">
         <div class="row">
             <div class="col-lg-12">
-            <div class="loop owl-carousel">
-                <div class="item">
-                <a href="{{ route('detailSuspensi') }}">
-                    <div class="portfolio-item">
-                    <div class="thumb">
-                    <img src="{{ asset('images/suspension/shockrcb.jpg') }}" alt="">
+                <div class="loop owl-carousel">
+
+                    @foreach($dataESuspensi as $suspensi)
+                    <div class="item">
+                        <a href="{{ route('detailESuspensi', ['id' => $suspensi->id_suspensi]) }}">
+                            <div class="portfolio-item">
+                                <div class="thumb">
+                                    <img src="{{ asset('storage/images/suspensi/' . $suspensi->gambar_suspensi) }}" alt="{{ $suspensi->nama_suspensi }}">
+                                </div>
+                                <div class="down-content">
+                                    <h4>{{ $suspensi->nama_suspensi }}</h4>
+                                    <span>Rp. {{ number_format($suspensi->harga_suspensi, 0, ',', '.') }}</span>
+                                </div>
+                            </div>
+                        </a>  
                     </div>
-                    <div class="down-content">
-                    <h4>Racing Boy Vario 160</h4>
-                    <span>Rp. 2.850.000</span>
-                    </div>
-                </div>
-                </a>  
-                </div>
-                <div class="item">
-                <a href="#">
-                    <div class="portfolio-item">
-                    <div class="thumb">
-                    <img src="{{ asset('images/portfolio-01.jpg') }}" alt="">
-                    </div>
-                    <div class="down-content">
-                    <h4>Website Builder</h4>
-                    <span>Marketing</span>
-                    </div>
-                </div>
-                </a>  
-                </div>
-                <div class="item">
-                <a href="#">
-                    <div class="portfolio-item">
-                    <div class="thumb">
-                    <img src="{{ asset('images/portfolio-02.jpg') }}" alt="">
-                    </div>
-                    <div class="down-content">
-                    <h4>Website Builder</h4>
-                    <span>Marketing</span>
-                    </div>
-                </div>
-                </a>  
-                </div>
-                <div class="item">
-                <a href="#">
-                    <div class="portfolio-item">
-                    <div class="thumb">
-                    <img src="{{ asset('images/portfolio-03.jpg') }}" alt="">
-                    </div>
-                    <div class="down-content">
-                    <h4>Website Builder</h4>
-                    <span>Marketing</span>
-                    </div>
-                </div>
-                </a>  
-                </div>
-                <div class="item">
-                <a href="#">
-                    <div class="portfolio-item">
-                    <div class="thumb">
-                    <img src="{{ asset('images/portfolio-04.jpg') }}" alt="">
-                    </div>
-                    <div class="down-content">
-                    <h4>Website Builder</h4>
-                    <span>Marketing</span>
-                    </div>
-                </div>
-                </a>  
+                    @endforeach
+
                 </div>
             </div>
-            </div>
-        </div>
         </div>
     </div>
 @endsection

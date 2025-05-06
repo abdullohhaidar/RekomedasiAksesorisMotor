@@ -86,13 +86,13 @@ https://templatemo.com/tm-568-digimedia
                     <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
                 </li>
                 <li class="scroll-to-section">
-                    <a href="{{ route('velg') }}" class="{{ request()->routeIs('velg') ? 'active' : '' }}">Velg</a>
+                    <a href="{{ route('etalaseVelg') }}" class="{{ request()->routeIs('etalaseVelg') ? 'active' : '' }}">Velg</a>
                 </li>
                 <li class="scroll-to-section">
-                    <a href="{{ route('ban') }}" class="{{ request()->is('ban') ? 'active' : '' }}">Tire</a>
+                    <a href="{{ route('etalaseBan') }}" class="{{ request()->is('etalaseBan') ? 'active' : '' }}">Tire</a>
                 </li>
                 <li class="scroll-to-section">
-                    <a href="{{ route('suspensi') }}" class="{{ request()->is('suspensi') ? 'active' : '' }}">Suspension</a>
+                    <a href="{{ route('etalaseSuspensi') }}" class="{{ request()->is('etalaseSuspensi') ? 'active' : '' }}">Suspension</a>
                 </li>
                 <li class="scroll-to-section">
                     <div class="border-first-button">

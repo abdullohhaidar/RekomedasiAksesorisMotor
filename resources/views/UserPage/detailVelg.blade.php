@@ -7,7 +7,7 @@
             <div class="col-lg-4 offset-lg-4 wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.3s">
                 <div class="section-heading">
                     <h6>Recent News</h6>
-                    <h4>Details <em>Product Tire</em></h4>
+                    <h4>Details <em>Product</em></h4>
                     <div class="line-dec"></div>
                 </div>
             </div>
@@ -15,13 +15,13 @@
             <div class="col-lg-6 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
                 <div class="blog-post">
                     <div class="thumb">
-                        <a href="#"><img src="{{ asset('storage/images/ban/' . $dataDBan->gambar_ban) }}" alt="{{ $dataDBan->nama_ban }}"></a>
+                        <a href="#"><img src="{{ asset('storage/images/velg/' . $dataDVelg->gambar_velg) }}" alt="{{ $dataDVelg->nama_velg }}"></a>
                     </div>
                     <div class="down-content">
-                        <span class="category">Rp. {{ number_format($dataDBan->harga_ban, 0, ',', '.') }}</span>
-                        <span class="date">{{ \Carbon\Carbon::parse($dataDBan->created_at)->format('d F Y') }}</span>
-                        <a href="#"><h4>{{ $dataDBan->merk_ban }}</h4></a>
-                        <p>{{ $dataDBan->nama_ban }}</p>
+                        <span class="category">Rp. {{ number_format($dataDVelg->harga_velg, 0, ',', '.') }}</span>
+                        <span class="date">{{ \Carbon\Carbon::parse($dataDVelg->created_at)->format('d F Y') }}</span>
+                        <a href="#"><h4>{{ $dataDVelg->nama_velg }}</h4></a>
+                        <p>{{ $dataDVelg->merk_velg }}</p>
                     </div>
                 </div>
             </div>
@@ -36,8 +36,8 @@
                                 </div>
                                 <div class="right-content">
                                     <a href="#"><h4>Size Tire</h4></a>
-                                    <p>Front = {{ $dataDBan->ukuran_ban }}</p>
-                                    <p>Back = {{ $dataDBan->ukuran_ban }}</p>
+                                    <p>Front = {{ $dataDVelg->ukuran_velg }}</p>
+                                    <p>Back = {{ $dataDVelg->ukuran_velg }}</p>
                                 </div>
                             </div>
                         </div>
@@ -45,11 +45,11 @@
                         <div class="col-lg-12 mt-3">
                             <div class="post-item">
                                 <div class="thumb">
-                                    <a href="#"><img src="{{ asset('images/icon/tire.png') }}" alt=""></a>
+                                    <a href="#"><img src="{{ asset('images/icon/steel-bar.png') }}" alt=""></a>
                                 </div>
                                 <div class="right-content">
-                                    <a href="#"><h4>Type Tire</h4></a>
-                                    <p>{{ $dataDBan->tipe_ban }}</p>
+                                    <a href="#"><h4>Material</h4></a>
+                                    <p>{{ $dataDVelg->material_velg }}</p>
                                 </div>
                             </div>
                         </div>
@@ -57,32 +57,32 @@
                         <div class="col-lg-12 mt-3">
                             <div class="post-item">
                                 <div class="thumb">
-                                    <a href="#"><img src="{{ asset('images/icon/motorcycle.png') }}" alt=""></a>
+                                    <a href="#"><img src="{{ asset('images/icon/art.png') }}" alt=""></a>
                                 </div>
                                 <div class="right-content">
-                                    <a href="#"><h4>Motorcycle Type</h4></a>
-                                    <p>{{ $dataDBan->tipe_motor }}</p>
+                                    <a href="#"><h4>Color Velg</h4></a>
+                                    <p>{{ $dataDVelg->warna_velg }}</p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-lg-12 mt-3">
-                            <div class="post-item last-post-item">
+                            <div class="post-item">
                                 <div class="thumb">
                                     <a href="#"><img src="{{ asset('images/icon/brand.png') }}" alt=""></a>
                                 </div>
                                 <div class="right-content">
                                     <a href="#"><h4>Brand And Model</h4></a>
-                                    <p>Brand = {{ $dataDBan->merk_ban }}</p>
-                                    <p>Model = {{ $dataDBan->model_ban }}</p>
+                                    <p>Brand = {{ $dataDVelg->brand_velg }}</p>
+                                    <p>Model = {{ $dataDVelg->model_velg }}</p>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- .row -->
-                </div> <!-- .blog-posts -->
-            </div> <!-- .col-lg-6 -->
-        </div>
-    </div>
-</div>
+                    </div>
+                </div>
+            </div> <!-- col-lg-6 -->
+        </div> <!-- row -->
+    </div> <!-- container -->
+</div> <!-- blog -->
 
 @endsection

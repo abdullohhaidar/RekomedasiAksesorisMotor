@@ -1,7 +1,7 @@
 @extends('UserPage.defaultFix')
 
 @section('content')
-    <div class="main-banner-velg wow fadeIn " id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+    <div class="main-banner-ban wow fadeIn " id="top" data-wow-duration="1s" data-wow-delay="0.5s">
         <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -34,75 +34,26 @@
         <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s">
         <div class="row">
             <div class="col-lg-12">
-            <div class="loop owl-carousel">
-                <div class="item">
-                <a href="{{ route('detailBan') }}">
-                    <div class="portfolio-item">
-                    <div class="thumb">
-                    <img src="{{ asset('images/tire/tireVario.jpg.webp') }}" alt="">
+                <div class="loop owl-carousel">
+
+                    @foreach($dataEBan as $ban)
+                    <div class="item">
+                        <a href="{{ route('detailEBan', ['id' => $ban->id_ban]) }}">
+                            <div class="portfolio-item">
+                                <div class="thumb">
+                                    <img src="{{ asset('storage/images/ban/' . $ban->gambar_ban) }}" alt="{{ $ban->nama_ban }}">
+                                </div>
+                                <div class="down-content">
+                                    <h4>{{ $ban->nama_ban }}</h4>
+                                    <span>Rp. {{ number_format($ban->harga_ban, 0, ',', '.') }}</span>
+                                </div>
+                            </div>
+                        </a>  
                     </div>
-                    <div class="down-content">
-                    <h4>Vario 160 Michelin</h4>
-                    <span>Rp. 1.755.000</span>
-                    </div>
-                </div>
-                </a>  
-                </div>
-                <div class="item">
-                <a href="#">
-                    <div class="portfolio-item">
-                    <div class="thumb">
-                    <img src="{{ asset('images/portfolio-01.jpg') }}" alt="">
-                    </div>
-                    <div class="down-content">
-                    <h4>Website Builder</h4>
-                    <span>Marketing</span>
-                    </div>
-                </div>
-                </a>  
-                </div>
-                <div class="item">
-                <a href="#">
-                    <div class="portfolio-item">
-                    <div class="thumb">
-                    <img src="{{ asset('images/portfolio-02.jpg') }}" alt="">
-                    </div>
-                    <div class="down-content">
-                    <h4>Website Builder</h4>
-                    <span>Marketing</span>
-                    </div>
-                </div>
-                </a>  
-                </div>
-                <div class="item">
-                <a href="#">
-                    <div class="portfolio-item">
-                    <div class="thumb">
-                    <img src="{{ asset('images/portfolio-03.jpg') }}" alt="">
-                    </div>
-                    <div class="down-content">
-                    <h4>Website Builder</h4>
-                    <span>Marketing</span>
-                    </div>
-                </div>
-                </a>  
-                </div>
-                <div class="item">
-                <a href="#">
-                    <div class="portfolio-item">
-                    <div class="thumb">
-                    <img src="{{ asset('images/portfolio-04.jpg') }}" alt="">
-                    </div>
-                    <div class="down-content">
-                    <h4>Website Builder</h4>
-                    <span>Marketing</span>
-                    </div>
-                </div>
-                </a>  
+                    @endforeach
+
                 </div>
             </div>
-            </div>
-        </div>
         </div>
     </div>
 @endsection
