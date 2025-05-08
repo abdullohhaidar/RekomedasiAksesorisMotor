@@ -82,7 +82,7 @@ class BanController extends Controller
         ]);
 
         // Ambil data lama dari DB
-        $ban = Ban::findOrFail($id);
+        $ban = Ban::findOrFail($request->id_ban);
 
         // Proses upload gambar jika ada file baru
         if ($request->hasFile('gambar_ban')) {
@@ -107,7 +107,7 @@ class BanController extends Controller
             'ukuran_ban' => $request->ukuran_ban,
             'tipe_ban' => $request->tipe_ban,
             'tipe_motor' => $request->tipe_motor,
-            'brand_ban' => $request->brand_ban,
+            'model_ban' => $request->model_ban,
             'gambar_ban' => $filename
         ]);
 

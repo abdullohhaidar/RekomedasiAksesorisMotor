@@ -76,18 +76,18 @@ class VelgController extends Controller
         $request->validate([
             'nama_velg' => 'required|string|max:250',
             'merk_velg' => 'required|string|max:250',
-            'harga_velg' => 'required|integer',
+            'harga_velg' => 'required|numeric',
             'ukuran_velg' => 'required|string|max:250',
             'material_velg' => 'required|string|max:250',
             'warna_velg' => 'required|string|max:250',
             'brand_velg' => 'required|string|max:250',
             'model_velg' => 'required|string|max:250',
-            'gambar_velg' => 'nullable|image|mimes:jpg,jpeg,png,,webp',
+            'gambar_velg' => 'nullable|image|mimes:jpg,jpeg,png,webp',
             'gambar_velg_lama' => 'nullable|string',
         ]);
 
         // Ambil data lama dari DB
-        $velg = Velg::findOrFail($id);
+        $velg = Velg::findOrFail($request->id_velg);
 
         // Proses upload gambar jika ada file baru
         if ($request->hasFile('gambar_velg')) {
@@ -96,8 +96,8 @@ class VelgController extends Controller
             $file->storeAs('images/velg', $filename, 'public');
 
             // Hapus file lama jika ada
-            if ($request->gambar_velg_lama && File::exists(public_path('images/velg/' . $request->gambar_velg_lama))) {
-                File::delete(public_path('images/velg/' . $request->gambar_velg_lama));
+            if ($request->gambar_velg_lama && Storage::disk('public')->exists('images/velg/' . $request->gambar_velg_lama)) {
+                Storage::disk('public')->delete('images/velg/' . $request->gambar_velg_lama);
             }
         } else {
             // Jika tidak upload gambar baru, gunakan gambar lama
@@ -109,7 +109,7 @@ class VelgController extends Controller
         $velg->update([
             'nama_velg' => $request->nama_velg,
             'merk_velg' => $request->merk_velg,
-            'harga_velg' => $request->harga_velg,
+            'harga_velg' => (int) str_replace('.', '', $request->harga_velg),
             'ukuran_velg' => $request->ukuran_velg,
             'material_velg' => $request->material_velg,
             'warna_velg' => $request->warna_velg,
@@ -119,8 +119,9 @@ class VelgController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Data velg berhasil diperbarui.');
-        // return response()->json($request);
     }
+
+    
 
     public function destroy($id)
     {

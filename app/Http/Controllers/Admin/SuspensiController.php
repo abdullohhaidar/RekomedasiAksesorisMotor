@@ -82,7 +82,7 @@ class SuspensiController extends Controller
         ]);
 
         // Ambil data lama dari DB
-        $suspensi = Suspensi::findOrFail($id);
+        $suspensi = Suspensi::findOrFail($request->id_suspensi);
 
         // Simpan nama gambar yang lama secara default
         // Proses upload gambar jika ada file baru

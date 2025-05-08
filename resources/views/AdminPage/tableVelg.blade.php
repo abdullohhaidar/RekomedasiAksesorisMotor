@@ -80,7 +80,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form id="productForm" action="{{ route('velg.input') }}" method="POST" enctype="multipart/form-data">
+                <form id="productForm" action="{{ route('velg.input') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         
                         <div class="mb-3">
@@ -154,8 +154,8 @@
 
                 <div class="modal-body">
                 <form id="productForm" action="{{ route('velg.update', $velg->id_velg) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
+                    @csrf
+                    @method('PUT')
                     
                         <!-- Setiap input diberi style tambahan -->
                         <div class="mb-3">
@@ -246,27 +246,17 @@
     </footer> 
 
     <script>
-    (() => {
-        'use strict'
-        const form = document.getElementById('produkForm');
-        form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-        }, false);
-    })();
-    </script>
-
-    <script>
     function showEditModal(id) {
         // Ambil data velg berdasarkan ID via AJAX
+        
         fetch('/velg/' + id)
             .then(response => response.json())
             .then(data => {
-                // Isi form dengan data yang didapat
-                // document.getElementById('productForm').action = '/velg/update/' + data.id;
+                
+                // const form = document.getElementById('productForm');
+                // const baseRoute = form.getAttribute('data-route');
+                // form.action = baseRoute.replace('ID_PLACEHOLDER', data.id_velg);
+                // document.getElementById('productForm').action = '/velg/update/' + data.id_velg;
                 document.getElementById('edit_id_velg').value = data.id_velg;
                 document.getElementById('edit_nama_velg').value = data.nama_velg;
                 document.getElementById('edit_merk_velg').value = data.merk_velg;
@@ -279,6 +269,8 @@
                 document.getElementById('preview_gambar_velg').src = '/storage/images/velg/' + data.gambar_velg;
                 document.getElementById('gambar_velg_lama').value = data.gambar_velg;
                 document.getElementById('gambar_velg_lama_baru').value = data.gambar_velg;
+
+               
                    
                 // gambar tidak bisa dipreview langsung dari path (jika perlu, bisa tampilkan di tag <img>)
                 
