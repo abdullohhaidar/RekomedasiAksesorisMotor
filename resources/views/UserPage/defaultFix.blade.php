@@ -18,6 +18,7 @@
 
 
     <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('css/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/UserPage/defaultFix.css') }}">
     <link rel="stylesheet" href="{{ asset('css/animated.css') }}">
@@ -52,7 +53,7 @@ https://templatemo.com/tm-568-digimedia
       <div class="row">
         <div class="col-lg-8 col-sm-8 col-7">
           <ul class="info">
-            <li><a href="#"><i class="fa fa-envelope"></i>digimedia@company.com</a></li>
+            <li><a href="#"><i class="fa fa-envelope"></i>AbdullohHaidar@company.com</a></li>
             <li><a href="#"><i class="fa fa-phone"></i>010-020-0340</a></li>
           </ul>
         </div>

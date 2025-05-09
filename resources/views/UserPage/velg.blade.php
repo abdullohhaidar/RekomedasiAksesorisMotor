@@ -32,29 +32,29 @@
         </div>
         </div>
         <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="loop owl-carousel">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="loop owl-carousel">
 
-                    @foreach($dataEVelg as $velg)
-                    <div class="item">
-                        <a href="{{ route('detailEVelg', ['id' => $velg->id_velg]) }}">
-                            <div class="portfolio-item">
-                                <div class="thumb">
-                                    <img src="{{ asset('storage/images/velg/' . $velg->gambar_velg) }}" alt="{{ $velg->nama_velg }}">
+                        @foreach($dataEVelg as $velg)
+                        <div class="item">
+                            <a href="{{ route('detailEVelg', ['id' => $velg->id_velg]) }}">
+                                <div class="portfolio-item">
+                                    <div class="thumb">
+                                        <img src="{{ asset('storage/images/velg/' . $velg->gambar_velg) }}" alt="{{ $velg->nama_velg }}">
+                                    </div>
+                                    <div class="down-content">
+                                        <h4>{{ $velg->nama_velg }}</h4>
+                                        <span>Rp. {{ number_format($velg->harga_velg, 0, ',', '.') }}</span>
+                                    </div>
                                 </div>
-                                <div class="down-content">
-                                    <h4>{{ $velg->nama_velg }}</h4>
-                                    <span>Rp. {{ number_format($velg->harga_velg, 0, ',', '.') }}</span>
-                                </div>
-                            </div>
-                        </a>  
+                            </a>  
+                        </div>
+                        @endforeach
+
                     </div>
-                    @endforeach
-
                 </div>
             </div>
         </div>
-</div>
     </div>
 @endsection

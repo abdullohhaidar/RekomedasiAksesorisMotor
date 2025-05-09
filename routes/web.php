@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SuspensiController;
 use App\Http\Controllers\EtalaseBanController;
 use App\Http\Controllers\EtalaseSuspensiController;
 use App\Http\Controllers\EtalaseVelgController;
+use App\Http\Controllers\RekomendasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,9 +62,17 @@ Route::get('/detailSuspensi', function () {
     return view('UserPage.detailSuspensi');
 })->name('detailSuspensi');
 
-Route::get('/rekomendasi', function () {
-    return view('UserPage.rekomendasi');
-})->name('rekomendasi');
+// Route::get('/rekomendasi', function () {
+//     return view('UserPage.rekomendasi');
+// })->name('rekomendasi');
+Route::get('/rekomendasi', [RekomendasiController::class, 'showRekomendasiForm'])->name('rekomendasi');
+Route::post('/rekomendasi/velg', [RekomendasiController::class, 'filterVelg'])->name('rekomendasi.velg');
+Route::post('/rekomendasi/ban', [RekomendasiController::class, 'filterBan'])->name('rekomendasi.ban');
+Route::post('/rekomendasi/suspensi', [RekomendasiController::class, 'filterSuspensi'])->name('rekomendasi.suspensi');
+Route::get('/get-ukuran-velg/{nama_motor}', [RekomendasiController::class, 'getUkuranVelg'])->name('ukuranVelg');
+Route::get('/get-ukuran-ban/{nama_motor}', [RekomendasiController::class, 'getUkuranBan'])->name('ukuranBan');
+Route::get('/get-ukuran-suspensi/{nama_motor}', [RekomendasiController::class, 'getUkuranSuspensi'])->name('ukuranSuspensi');
+
 
 Route::get('/admin', function () {
     return view('AdminPage.default');

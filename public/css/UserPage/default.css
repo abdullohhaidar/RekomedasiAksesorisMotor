@@ -1963,6 +1963,7 @@ form#contact input {
   margin-top: 30px;
 }
 
+
 form#contact input::placeholder {
   color: #aaa;
 }

@@ -60,184 +60,229 @@
             </div>
         </div>
         </div>
-        <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s">
-        <div class="row">
-            <div class="col-lg-12">
-            <div class="loop owl-carousel">
-                <div class="item">
-                <a href="{{ route('detail') }}">
-                    <div class="portfolio-item">
-                    <div class="thumb">
-                    <img src="{{ asset('images/portfolio-01.jpg') }}" alt="">
+
+        @if($dataRekomVelg->isEmpty() && $dataRekomBan->isEmpty() && $dataRekomSuspensi->isEmpty())
+            <p class="text-center">Silakan isi form rekomendasi terlebih dahulu.</p>
+        @endif
+
+        {{-- Rekomendasi Velg --}}
+        @if($dataRekomVelg->isNotEmpty())
+            <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="loop owl-carousel">
+                            @foreach($dataRekomVelg as $velg)
+                                <div class="item">
+                                    <a href="{{ route('detailEVelg', ['id' => $velg->id_velg]) }}">
+                                        <div class="portfolio-item">
+                                            <div class="thumb">
+                                                <img src="{{ asset('storage/images/velg/' . $velg->gambar_velg) }}" alt="{{ $velg->nama_velg }}">
+                                            </div>
+                                            <div class="down-content">
+                                                <h4>{{ $velg->nama_velg }}</h4>
+                                                <span>Rp. {{ number_format($velg->harga_velg, 0, ',', '.') }}</span>
+                                            </div>
+                                        </div>
+                                    </a>  
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                    <div class="down-content">
-                    <h4>Velg RCB</h4>
-                    <span>Rp. 200.000</span>
-                    </div>
-                </div>
-                </a>  
-                </div>
-                <div class="item">
-                <a href="#">
-                    <div class="portfolio-item">
-                    <div class="thumb">
-                    <img src="{{ asset('images/portfolio-01.jpg') }}" alt="">
-                    </div>
-                    <div class="down-content">
-                    <h4>Website Builder</h4>
-                    <span>Marketing</span>
-                    </div>
-                </div>
-                </a>  
-                </div>
-                <div class="item">
-                <a href="#">
-                    <div class="portfolio-item">
-                    <div class="thumb">
-                    <img src="{{ asset('images/portfolio-02.jpg') }}" alt="">
-                    </div>
-                    <div class="down-content">
-                    <h4>Website Builder</h4>
-                    <span>Marketing</span>
-                    </div>
-                </div>
-                </a>  
-                </div>
-                <div class="item">
-                <a href="#">
-                    <div class="portfolio-item">
-                    <div class="thumb">
-                    <img src="{{ asset('images/portfolio-03.jpg') }}" alt="">
-                    </div>
-                    <div class="down-content">
-                    <h4>Website Builder</h4>
-                    <span>Marketing</span>
-                    </div>
-                </div>
-                </a>  
-                </div>
-                <div class="item">
-                <a href="#">
-                    <div class="portfolio-item">
-                    <div class="thumb">
-                    <img src="{{ asset('images/portfolio-04.jpg') }}" alt="">
-                    </div>
-                    <div class="down-content">
-                    <h4>Website Builder</h4>
-                    <span>Marketing</span>
-                    </div>
-                </div>
-                </a>  
                 </div>
             </div>
+        @endif
+
+        {{-- Rekomendasi Ban --}}
+        @if($dataRekomBan->isNotEmpty())
+            <h4 class="text-center mt-5 mb-4">Rekomendasi Ban</h4>
+            <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="loop owl-carousel">
+                            @foreach($dataRekomBan as $ban)
+                                <div class="item">
+                                    <div class="portfolio-item">
+                                        <div class="thumb">
+                                            <img src="{{ asset('storage/images/ban/' . $ban->gambar_ban) }}" alt="{{ $ban->nama_ban }}">
+                                        </div>
+                                        <div class="down-content">
+                                            <h4>{{ $ban->nama_ban }}</h4>
+                                            <span>Rp. {{ number_format($ban->harga_ban, 0, ',', '.') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        @endif
+
+        {{-- Rekomendasi Suspensi --}}
+        @if($dataRekomSuspensi->isNotEmpty())
+            <h4 class="text-center mt-5 mb-4">Rekomendasi Suspensi</h4>
+            <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="loop owl-carousel">
+                            @foreach($dataRekomSuspensi as $suspensi)
+                                <div class="item">
+                                    <div class="portfolio-item">
+                                        <div class="thumb">
+                                            <img src="{{ asset('storage/images/suspensi/' . $suspensi->gambar_suspensi) }}" alt="{{ $suspensi->nama_suspensi }}">
+                                        </div>
+                                        <div class="down-content">
+                                            <h4>{{ $suspensi->nama_suspensi }}</h4>
+                                            <span>Rp. {{ number_format($suspensi->harga_suspensi, 0, ',', '.') }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        
+    </div>
+
+    <!-- Modal Rekomendasi Velg -->
+    <div class="modal fade" id="productModalVelg" tabindex="-1" aria-labelledby="productModalVelgLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable"> <!-- Tambahkan modal-xl agar lebih besar -->
+            <div class="modal-content rounded-4 shadow-sm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productModalVelgLabel">Rekomendasi Velg</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form id="contact" action="{{ route('rekomendasi.velg') }}" method="POST">
+                        @csrf
+                            <div class="row p-4">
+                            <h3 class="tipe motor" >Pilih Motor</h3>
+                                <div class="col-lg-2 mb-2" name="vario 150">
+                                    <button type="button" class="btn btn-outline-success pilih-motor" data-nama="Honda Vario 150">Vario 150</button>
+                                </div>
+                                <div class="col-lg-2 mb-2" name="vario 160">
+                                    <button type="button" class="btn btn-outline-success pilih-motor" data-nama="Honda Vario 160">Vario 160</button>
+                                </div>
+                                <div class="col-lg-2 mb-2" name="pcx">
+                                    <button type="button" class="btn btn-outline-success pilih-motor" data-nama="Honda PCX 160">PCX 160</button>
+                                </div>
+
+                                <div class="col-lg-2 mb-2" name="aerox">
+                                    <button type="button" class="btn btn-outline-success pilih-motor" data-nama="Yamaha AEROX 155">AEROX 155</button>
+                                </div>
+
+                                <div class="col-lg-2 mb-2" name="nmax">
+                                    <button type="button" class="btn btn-outline-success pilih-motor" data-nama="Yamaha NMAX 155">NMAX 155</button>
+                                </div>
+
+                                <div class="col-lg-2 mb-2" name="lexi">
+                                    <button type="button" class="btn btn-outline-success pilih-motor" data-nama="Yamaha Lexi 155">Lexi 155</button>
+                                </div>
+
+                                <div class="col-lg-12 mb-3">
+                                    <fieldset class="mt-1">
+                                        <input type="text" name="ukuran_velg" id="ukuran_velg" class="form-control" placeholder="Ukuran Velg" required readonly>
+                                    </fieldset>
+                                    <fieldset class="mt-3">
+                                    <select class="form-select py-2 px-3 border rounded" id="merk" name="merk">
+                                        <option value="">Pilih Merk</option>
+                                        @foreach($kategoriVelg->pluck('merk_velg')->unique() as $merk)
+                                            <option value="{{ $merk }}">{{ $merk }}</option>
+                                        @endforeach
+                                    </select>
+                                    </fieldset>
+                                    <fieldset class="mt-3">
+                                    <select class="form-select py-2 px-3 border rounded" id="merk" name="Material">
+                                        <option value="">Pilih Material</option>
+                                        @foreach($kategoriVelg->pluck('material_velg')->unique() as $material)
+                                            <option value="{{ $material }}">{{ $material }}</option>
+                                        @endforeach
+                                    </select>
+                                    </fieldset>
+                                </div>
+                                <div class="col-12 text-end">
+                                    <fieldset>
+                                        <button type="submit" id="form-submit" class="btn btn-success">Tampilkan Rekomendasi Velg</button>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Modal Rekomedasi Velg -->
-    <div class="modal fade" id="productModalVelg" tabindex="-1" aria-labelledby="productModalVelgLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="productModalVelgLabel">Rekomedasi Velg</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="productFormVelg">
-                        <div class="mb-3">
-                            <label for="nama" class="form-label">Nama Produk</label>
-                            <select class="form-select" id="nama" name="nama" required>
-                                <option value="">Pilih Produk</option>
-                                <option value="Produk A">Produk A</option>
-                                <option value="Produk B">Produk B</option>
-                                <option value="Produk C">Produk C</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="merk" class="form-label">Merk</label>
-                            <select class="form-select" id="merk" name="merk" required>
-                                <option value="">Pilih Merk</option>
-                                <option value="Merk X">Merk X</option>
-                                <option value="Merk Y">Merk Y</option>
-                                <option value="Merk Z">Merk Z</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="model" class="form-label">Model</label>
-                            <select class="form-select" id="model" name="model" required>
-                                <option value="">Pilih Model</option>
-                                <option value="Model 1">Model 1</option>
-                                <option value="Model 2">Model 2</option>
-                                <option value="Model 3">Model 3</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="harga" class="form-label">Harga</label>
-                            <select class="form-select" id="harga" name="harga" required>
-                                <option value="">Pilih Harga</option>
-                                <option value="100000">100,000</option>
-                                <option value="200000">200,000</option>
-                                <option value="300000">300,000</option>
-                            </select>
-                        </div>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success">Simpan</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Modal Rekomedasi Tire -->
     <div class="modal fade" id="productModalTire" tabindex="-1" aria-labelledby="productModalTireLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable"> <!-- Tambahkan modal-xl agar lebih besar -->
+            <div class="modal-content rounded-4 shadow-sm">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="productModalTireLabel">Rekomedasi Ban</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="productModalTireLabel">Rekomendasi Ban</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="productFormTire">
-                        <div class="mb-3">
-                            <label for="nama" class="form-label">Nama Produk</label>
-                            <select class="form-select" id="nama" name="nama" required>
-                                <option value="">Pilih Produk</option>
-                                <option value="Produk A">Produk A</option>
-                                <option value="Produk B">Produk B</option>
-                                <option value="Produk C">Produk C</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="merk" class="form-label">Merk</label>
-                            <select class="form-select" id="merk" name="merk" required>
-                                <option value="">Pilih Merk</option>
-                                <option value="Merk X">Merk X</option>
-                                <option value="Merk Y">Merk Y</option>
-                                <option value="Merk Z">Merk Z</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="model" class="form-label">Model</label>
-                            <select class="form-select" id="model" name="model" required>
-                                <option value="">Pilih Model</option>
-                                <option value="Model 1">Model 1</option>
-                                <option value="Model 2">Model 2</option>
-                                <option value="Model 3">Model 3</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="harga" class="form-label">Harga</label>
-                            <select class="form-select" id="harga" name="harga" required>
-                                <option value="">Pilih Harga</option>
-                                <option value="100000">100,000</option>
-                                <option value="200000">200,000</option>
-                                <option value="300000">300,000</option>
-                            </select>
-                        </div>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success">Simpan</button>
-                    </form>
+                    <div class="container-fluid">
+                        <form id="contact" action="{{ route('rekomendasi.ban') }}" method="POST">
+                        @csrf
+                            <div class="row p-4">
+                            <h3 class="tipe motor" >Pilih Motor</h3>
+                                <div class="col-lg-2 mb-2" name="vario 150">
+                                    <button type="button" class="btn btn-outline-success pilih-motor-ban" data-nama="Honda Vario 150">Vario 150</button>
+                                </div>
+                                <div class="col-lg-2 mb-2" name="vario 160">
+                                    <button type="button" class="btn btn-outline-success pilih-motor-ban" data-nama="Honda Vario 160">Vario 160</button>
+                                </div>
+                                <div class="col-lg-2 mb-2" name="pcx">
+                                    <button type="button" class="btn btn-outline-success pilih-motor-ban" data-nama="Honda PCX 160">PCX 160</button>
+                                </div>
+
+                                <div class="col-lg-2 mb-2" name="aerox">
+                                    <button type="button" class="btn btn-outline-success pilih-motor-ban" data-nama="Yamaha AEROX 155">AEROX 155</button>
+                                </div>
+
+                                <div class="col-lg-2 mb-2" name="nmax">
+                                    <button type="button" class="btn btn-outline-success pilih-motor-ban" data-nama="Yamaha NMAX 155">NMAX 155</button>
+                                </div>
+
+                                <div class="col-lg-2 mb-2" name="lexi">
+                                    <button type="button" class="btn btn-outline-success pilih-motor-ban" data-nama="Yamaha Lexi 155">Lexi 155</button>
+                                </div>
+
+                                <div class="col-lg-12 mb-3">
+                                    <fieldset class="mt-1">
+                                        <input type="text" name="ukuran_ban" id="ukuran_ban" class="form-control" placeholder="Ukuran Ban" required readonly>
+                                    </fieldset>
+                                    <fieldset class="mt-3">
+                                    <select class="form-select py-2 px-3 border rounded" id="merk" name="merk">
+                                        <option value="">Pilih Merk</option>
+                                        @foreach($kategoriBan->pluck('merk_ban')->unique() as $merk)
+                                            <option value="{{ $merk }}">{{ $merk }}</option>
+                                        @endforeach
+                                    </select>
+                                    </fieldset>
+                                    <fieldset class="mt-3">
+                                    <select class="form-select py-2 px-3 border rounded" id="merk" name="Material">
+                                        <option value="">Pilih Material</option>
+                                        @foreach($kategoriBan->pluck('tipe_ban')->unique() as $type)
+                                            <option value="{{ $type }}">{{ $type }}</option>
+                                        @endforeach
+                                    </select>
+                                    </fieldset>
+                                </div>
+                                <div class="col-12 text-end">
+                                    <fieldset>
+                                        <button type="submit" id="form-submit" class="btn btn-success">Tampilkan Rekomendasi Ban</button>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -245,53 +290,60 @@
 
     <!-- Modal Rekomedasi Suspension -->
     <div class="modal fade" id="productModalSuspension" tabindex="-1" aria-labelledby="productModalSuspensionLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable"> <!-- Tambahkan modal-xl agar lebih besar -->
+            <div class="modal-content rounded-4 shadow-sm">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="productModalSuspensionLabel">Rekomedasi Suspensi</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="productModalSuspensionLabel">Rekomendasi Suspensi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="productFormSuspension">
-                        <div class="mb-3">
-                            <label for="nama" class="form-label">Nama Produk</label>
-                            <select class="form-select" id="nama" name="nama" required>
-                                <option value="">Pilih Produk</option>
-                                <option value="Produk A">Produk A</option>
-                                <option value="Produk B">Produk B</option>
-                                <option value="Produk C">Produk C</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="merk" class="form-label">Merk</label>
-                            <select class="form-select" id="merk" name="merk" required>
-                                <option value="">Pilih Merk</option>
-                                <option value="Merk X">Merk X</option>
-                                <option value="Merk Y">Merk Y</option>
-                                <option value="Merk Z">Merk Z</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="model" class="form-label">Model</label>
-                            <select class="form-select" id="model" name="model" required>
-                                <option value="">Pilih Model</option>
-                                <option value="Model 1">Model 1</option>
-                                <option value="Model 2">Model 2</option>
-                                <option value="Model 3">Model 3</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="harga" class="form-label">Harga</label>
-                            <select class="form-select" id="harga" name="harga" required>
-                                <option value="">Pilih Harga</option>
-                                <option value="100000">100,000</option>
-                                <option value="200000">200,000</option>
-                                <option value="300000">300,000</option>
-                            </select>
-                        </div>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success">Simpan</button>
-                    </form>
+                    <div class="container-fluid">
+                        <form id="contact" action="{{ route('rekomendasi.suspensi') }}" method="POST">
+                        @csrf
+                            <div class="row p-4">
+                            <h3 class="tipe motor" >Pilih Motor</h3>
+                                <div class="col-lg-2 mb-2" name="vario 150">
+                                    <button type="button" class="btn btn-outline-success pilih-motor-suspensi" data-nama="Honda Vario 150" >Vario 150</button>
+                                </div>
+                                <div class="col-lg-2 mb-2" name="vario 160">
+                                    <button type="button" class="btn btn-outline-success pilih-motor-suspensi" data-nama="Honda Vario 160" >Vario 160</button>
+                                </div>
+                                <div class="col-lg-2 mb-2" name="pcx">
+                                    <button type="button" class="btn btn-outline-success pilih-motor-suspensi" data-nama="Honda PCX 160" >PCX 160</button>
+                                </div>
+
+                                <div class="col-lg-2 mb-2" name="aerox">
+                                    <button type="button" class="btn btn-outline-success pilih-motor-suspensi" data-nama="Yamaha AEROX 155" >AEROX 155</button>
+                                </div>
+
+                                <div class="col-lg-2 mb-2" name="nmax">
+                                    <button type="button" class="btn btn-outline-success pilih-motor-suspensi" data-nama="Yamaha NMAX 155" >NMAX 155</button>
+                                </div>
+
+                                <div class="col-lg-2 mb-2" name="lexi">
+                                    <button type="button" class="btn btn-outline-success pilih-motor-suspensi" data-nama="Yamaha Lexi 155">Lexi 155</button>
+                                </div>
+
+                                <div class="col-lg-12 mb-3">
+                                    <fieldset class="mt-1">
+                                        <input type="text" name="ukuran_suspensi" id="ukuran_suspensi" class="form-control" placeholder="Ukuran Suspensi" required readonly>
+                                    </fieldset>
+                                    <fieldset class="mt-3">
+                                    <select class="form-select py-2 px-3 border rounded" id="merk" name="merk">
+                                        <option value="">Pilih Merk</option>
+                                        @foreach($kategoriSuspensi->pluck('merk_suspensi')->unique() as $merk)
+                                            <option value="{{ $merk }}">{{ $merk }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-12 text-end">
+                                    <fieldset>
+                                        <button type="submit" id="form-submit" class="btn btn-success">Tampilkan Rekomendasi Suspensi</button>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -324,5 +376,88 @@
             handleFormSubmit(event, "productModalSuspension");
         });
     });
+    </script>
+    <!-- Mengambil data Ukuran velg dari Nama Motor -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const motorButtons = document.querySelectorAll('.pilih-motor');
+            const inputUkuranVelg = document.getElementById('ukuran_velg');
+
+            motorButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const namaMotor = this.getAttribute('data-nama');
+                    fetch(`/get-ukuran-velg/${encodeURIComponent(namaMotor)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.ukuran_velg) {
+                                inputUkuranVelg.value = data.ukuran_velg;
+                            } else {
+                                inputUkuranVelg.value = '';
+                                alert('Data ukuran velg tidak ditemukan.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Terjadi kesalahan.');
+                        });
+                });
+            });
+        });
+    </script>
+
+    <!-- Mengambil data Ukuran Ban dari Nama Motor -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const motorBanButtons = document.querySelectorAll('.pilih-motor-ban');
+            const inputUkuranBan = document.getElementById('ukuran_ban');
+
+            motorBanButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const namaMotor = this.getAttribute('data-nama');
+                    fetch(`/get-ukuran-ban/${encodeURIComponent(namaMotor)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.ukuran_ban) {
+                                inputUkuranBan.value = data.ukuran_ban;
+                            } else {
+                                inputUkuranBan.value = '';
+                                alert('Data ukuran ban tidak ditemukan.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Terjadi kesalahan saat mengambil ukuran ban.');
+                        });
+                });
+            });
+        });
+    </script>
+
+    <!-- Mengambil data Ukuran Suspensi dari Nama Motor -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const motorButtons = document.querySelectorAll('.pilih-motor-suspensi');
+            const inputUkuran = document.getElementById('ukuran_suspensi');
+
+            motorButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const namaMotor = this.getAttribute('data-nama');
+                    fetch(`/get-ukuran-suspensi/${encodeURIComponent(namaMotor)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.ukuran_suspensi) {
+                                inputUkuran.value = data.ukuran_suspensi;
+                            } else {
+                                inputUkuran.value = '';
+                                alert('Data ukuran suspensi tidak ditemukan.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Terjadi kesalahan saat mengambil data.');
+                        });
+                });
+            });
+        });
     </script>
 @endsection
