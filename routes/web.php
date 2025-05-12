@@ -5,10 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\VelgController;
 use App\Http\Controllers\Admin\BanController;
 use App\Http\Controllers\Admin\SuspensiController;
+use App\Http\Controllers\Admin\KategoriVelgController;
+use App\Http\Controllers\Admin\KategoriSuspensiController;
+use App\Http\Controllers\Admin\KategoriBanController;
 use App\Http\Controllers\EtalaseBanController;
 use App\Http\Controllers\EtalaseSuspensiController;
 use App\Http\Controllers\EtalaseVelgController;
 use App\Http\Controllers\RekomendasiController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +91,27 @@ Route::get('/adminFix', function () {
 Route::get('/adminDashboard', function () {
     return view('AdminPage.dashboard');
 })->name('adminDashboard');
+
+// Kategori Velg
+Route::get('/adminKatVelg', [KategoriVelgController::class, 'index'])->name('adminKatVelg');
+Route::post('/katVelg/input', [KategoriVelgController::class, 'store'])->name('katVelg.input');
+Route::get('/katVelg/{id}', [KategoriVelgController::class, 'show'])->name('katVelg.show');
+Route::put('/katVelg/update/{id}', [KategoriVelgController::class, 'update'])->name('katVelg.update');
+Route::delete('/katVelg/{id}', [KategoriVelgController::class, 'destroy'])->name('katVelg.destroy');
+
+// Kategori Suspensi
+Route::get('/adminKatSuspensi', [KategoriSuspensiController::class, 'index'])->name('adminKatSuspensi');
+Route::post('/katSuspensi/input', [KategoriSuspensiController::class, 'store'])->name('katSuspensi.input');
+Route::get('/katSuspensi/{id}', [KategoriSuspensiController::class, 'show'])->name('katSuspensi.show');
+Route::put('/katSuspensi/update/{id}', [KategoriSuspensiController::class, 'update'])->name('katSuspensi.update');
+Route::delete('/katSuspensi/{id}', [KategoriSuspensiController::class, 'destroy'])->name('katSuspensi.destroy');
+
+// Kategori Ban
+Route::get('/adminKatBan', [KategoriBanController::class, 'index'])->name('adminKatBan');
+Route::post('/katBan/input', [KategoriBanController::class, 'store'])->name('katBan.input');
+Route::get('/katBan/{id}', [KategoriBanController::class, 'show'])->name('katBan.show');
+Route::put('/katBan/update/{id}', [KategoriBanController::class, 'update'])->name('katBan.update');
+Route::delete('/katBan/{id}', [KategoriBanController::class, 'destroy'])->name('katBan.destroy');
 
 // Velg
 // Route::get('/adminTableVelg', function () {

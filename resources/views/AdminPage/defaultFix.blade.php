@@ -231,10 +231,19 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="docs/documentation.html" target="_blank">
-                <span class="menu-title">Documentation</span>
-                <i class="mdi mdi-file-document-box menu-icon"></i>
+              <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+                <span class="menu-title">Kategori</span>
+                <i class="mdi mdi-table-large menu-icon"></i>
               </a>
+              <div class="collapse" id="tables">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('adminKatVelg') }}">Kategorti Velg</a>
+                    <a class="nav-link" href="{{ route('adminKatBan') }}">Kategori Tire</a>
+                    <a class="nav-link" href="{{ route('adminKatSuspensi') }}">Kategori Suspension</a>
+                  </li>
+                </ul>
+              </div>
             </li>
           </ul>
         </nav>
