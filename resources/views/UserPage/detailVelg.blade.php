@@ -1,6 +1,17 @@
 @extends('UserPage.defaultFix')
 
 @section('content')
+<style>
+  .animate-heart {
+    animation: pop 0.3s ease;
+  }
+
+  @keyframes pop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.4); }
+    100% { transform: scale(1); }
+  }
+</style>
 <div id="blog" class="blog">
     <div class="container">
         <div class="row">
@@ -19,7 +30,17 @@
                     </div>
                     <div class="down-content">
                         <span class="category">Rp. {{ number_format($dataDVelg->harga_velg, 0, ',', '.') }}</span>
-                        <span class="date">{{ \Carbon\Carbon::parse($dataDVelg->created_at)->format('d F Y') }}</span>
+                        <span class="date" style="margin-top: 50px;">
+                            <button id="likeButton" onclick="toggleLikeVelg(this)" 
+                                data-merk="{{ $dataDVelg->merk_velg }}"
+                                data-harga="{{ $dataDVelg->harga_velg }}"
+                                data-ukuran="{{ $dataDVelg->ukuran_velg }}"
+                                data-material="{{ $dataDVelg->material_velg }}"
+                                data-warna="{{ $dataDVelg->warna_velg }}"
+                                class="btn p-4 rounded-circle" style="background-color: white; border: none; box-shadow: none;">
+                                <i id="heartIcon" class="bi {{ $liked ? 'bi-heart-fill text-danger' : 'bi-heart text-secondary' }}" style="font-size: 2.5rem;"></i>
+                            </button>
+                        </span>
                         <a href="#"><h4>{{ $dataDVelg->nama_velg }}</h4></a>
                         <p>{{ $dataDVelg->merk_velg }}</p>
                     </div>
@@ -84,5 +105,41 @@
         </div> <!-- row -->
     </div> <!-- container -->
 </div> <!-- blog -->
+
+
+
+<script>
+function toggleLikeVelg(button) {
+    const icon = button.querySelector('i');
+    const data = {
+        _token: '{{ csrf_token() }}',
+        merk_velg: button.getAttribute('data-merk'),
+        harga_velg: button.getAttribute('data-harga'),
+        ukuran_velg: button.getAttribute('data-ukuran'),
+        material_velg: button.getAttribute('data-material'),
+        warna_velg: button.getAttribute('data-warna'),
+    };
+
+    fetch('{{ route('toggle.like.velg') }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': data._token
+        },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(response => {
+        if (response.liked) {
+            icon.classList.remove('bi-heart');
+            icon.classList.add('bi-heart-fill', 'text-danger');
+        } else {
+            icon.classList.remove('bi-heart-fill', 'text-danger');
+            icon.classList.add('bi-heart');
+        }
+    });
+}
+</script>
+
 
 @endsection

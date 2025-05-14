@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage; 
+use App\Models\HistoryLikeSuspensi;
 use App\Models\Suspensi;
+use Illuminate\Support\Facades\Session;
 
 class EtalaseSuspensiController extends Controller
 {
@@ -16,10 +18,18 @@ class EtalaseSuspensiController extends Controller
 
     public function show($id)
     {
-        // Ambil data velg berdasarkan id
         $dataDSuspensi = Suspensi::findOrFail($id);
+        $userId = session('id_user');
 
-        // Kembalikan data ke view, misalnya form edit
-        return view('UserPage.detailSuspensi', compact('dataDSuspensi'));
+        // Cek apakah Suspensi ini sudah dilike oleh user
+        $liked = HistoryLikeSuspensi::where('id_user', $userId)
+            ->where('merk_suspensi', $dataDSuspensi->merk_suspensi)
+            ->where('harga_suspensi', $dataDSuspensi->harga_suspensi)
+            ->exists();
+
+        // Simpan status ke session
+        Session::put('liked_' . $dataDSuspensi->merk_suspensi, $liked);
+
+        return view('UserPage.detailSuspensi', compact('dataDSuspensi', 'liked'));
     }
 }

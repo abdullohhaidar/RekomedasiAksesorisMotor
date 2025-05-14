@@ -12,6 +12,11 @@ use App\Http\Controllers\EtalaseBanController;
 use App\Http\Controllers\EtalaseSuspensiController;
 use App\Http\Controllers\EtalaseVelgController;
 use App\Http\Controllers\RekomendasiController;
+use App\Http\Controllers\LoginUserController;
+use App\Http\Controllers\RegisterUserController;
+use App\Http\Controllers\HistoryLikeVelgController;
+use App\Http\Controllers\HistoryLikeBanController;
+use App\Http\Controllers\HistoryLikeSuspensiController;
 
 
 /*
@@ -31,6 +36,14 @@ Route::get('/default', function () {
     return view('UserPage.default');
 });
 
+Route::get('/login', [LoginUserController::class, 'index'])->name('loginUser');
+Route::post('/login', [LoginUserController::class, 'loginUser'])->name('login');
+Route::get('/logout', [LoginUserController::class, 'logoutUser'])->name('logoutUser');
+
+
+Route::get('/register', [RegisterUserController::class, 'index'])->name('registerUser');
+Route::post('/register', [RegisterUserController::class, 'registerUser'])->name('register');
+
 Route::get('/', function () {
     return view('UserPage.halamanUtama');
 })->name('home');;
@@ -40,6 +53,7 @@ Route::get('/', function () {
 // })->name('velg');
 Route::get('/etalase/velg', [EtalaseVelgController::class, 'index'])->name('etalaseVelg');
 Route::get('/etalase/velg/detail/{id}', [EtalaseVelgController::class, 'show'])->name('detailEVelg');
+Route::post('/toggle-like-velg', [HistoryLikeVelgController::class, 'toggleLike'])->name('toggle.like.velg');
 
 
 // Route::get('/ban', function () {
@@ -47,12 +61,14 @@ Route::get('/etalase/velg/detail/{id}', [EtalaseVelgController::class, 'show'])-
 // })->name('ban');
 Route::get('/etalase/ban', [EtalaseBanController::class, 'index'])->name('etalaseBan');
 Route::get('/etalase/ban/detail/{id}', [EtalaseBanController::class, 'show'])->name('detailEBan');
+Route::post('/toggle-like-ban', [HistoryLikeBanController::class, 'toggleLike'])->name('toggle.like.ban');
 
 // Route::get('/suspensi', function () {
 //     return view('UserPage.suspensi');
 // })->name('suspensi');
 Route::get('/etalase/suspensi', [EtalaseSuspensiController::class, 'index'])->name('etalaseSuspensi');
 Route::get('/etalase/suspensi/detail/{id}', [EtalaseSuspensiController::class, 'show'])->name('detailESuspensi');
+Route::post('/toggle-like-suspensi', [HistoryLikeSuspensiController::class, 'toggleLike'])->name('toggle.like.suspensi');
 
 Route::get('/detailVelg', function () {
     return view('UserPage.detailVelg');

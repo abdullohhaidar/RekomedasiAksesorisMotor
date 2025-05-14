@@ -19,6 +19,7 @@
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ asset('css/UserPage/defaultFix.css') }}">
     <link rel="stylesheet" href="{{ asset('css/animated.css') }}">
@@ -53,8 +54,12 @@ https://templatemo.com/tm-568-digimedia
       <div class="row">
         <div class="col-lg-8 col-sm-8 col-7">
           <ul class="info">
-            <li><a href="#"><i class="fa fa-envelope"></i>AbdullohHaidar@company.com</a></li>
-            <li><a href="#"><i class="fa fa-phone"></i>010-020-0340</a></li>
+            @if(session()->has('email') && session()->has('no_hp'))
+              <li><a href="#"><i class="fa fa-envelope"></i> {{ session('email') }}</a></li>
+              <li><a href="#"><i class="fa fa-phone"></i> {{ session('no_hp') }}</a></li>
+            @else
+              <li><a href="{{ route('loginUser') }}"><i class="fa fa-user"></i> Silakan login</a></li>
+            @endif
           </ul>
         </div>
         <div class="col-lg-4 col-sm-4 col-5">
@@ -95,6 +100,11 @@ https://templatemo.com/tm-568-digimedia
                 <li class="scroll-to-section">
                     <a href="{{ route('etalaseSuspensi') }}" class="{{ request()->is('etalaseSuspensi') ? 'active' : '' }}">Suspension</a>
                 </li>
+
+                <li class="scroll-to-section">
+                    <a href="{{ route('logoutUser') }}" class="{{ request()->is('logoutUser') ? 'active' : '' }}">Logout</a>
+                </li>
+
                 <li class="scroll-to-section">
                     <div class="border-first-button">
                         <a href="{{ route('rekomendasi') }}">Rekomendasi</a>
