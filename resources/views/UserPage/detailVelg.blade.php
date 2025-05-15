@@ -37,6 +37,7 @@
                                 data-ukuran="{{ $dataDVelg->ukuran_velg }}"
                                 data-material="{{ $dataDVelg->material_velg }}"
                                 data-warna="{{ $dataDVelg->warna_velg }}"
+                                data-gambar="{{ $dataDVelg->gambar_velg }}"
                                 class="btn p-4 rounded-circle" style="background-color: white; border: none; box-shadow: none;">
                                 <i id="heartIcon" class="bi {{ $liked ? 'bi-heart-fill text-danger' : 'bi-heart text-secondary' }}" style="font-size: 2.5rem;"></i>
                             </button>
@@ -118,6 +119,7 @@ function toggleLikeVelg(button) {
         ukuran_velg: button.getAttribute('data-ukuran'),
         material_velg: button.getAttribute('data-material'),
         warna_velg: button.getAttribute('data-warna'),
+        gambar_velg: button.getAttribute('data-gambar'),
     };
 
     fetch('{{ route('toggle.like.velg') }}', {

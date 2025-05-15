@@ -36,6 +36,7 @@
                                 data-harga="{{ $dataDBan->harga_ban }}"
                                 data-ukuran="{{ $dataDBan->ukuran_ban }}"
                                 data-tipe="{{ $dataDBan->tipe_ban }}"
+                                data-gambar="{{ $dataDBan->gambar_ban }}"
                                 class="btn p-4 rounded-circle" style="background-color: white; border: none; box-shadow: none;">
                                 <i id="heartIcon" class="bi {{ $liked ? 'bi-heart-fill text-danger' : 'bi-heart text-secondary' }}" style="font-size: 2.5rem;"></i>
                             </button>
@@ -114,6 +115,7 @@ function toggleLikeBan(button) {
         harga_ban: button.getAttribute('data-harga'),
         ukuran_ban: button.getAttribute('data-ukuran'),
         tipe_ban: button.getAttribute('data-tipe'),
+        gambar_ban: button.getAttribute('data-gambar'),
     };
 
     fetch('{{ route('toggle.like.ban') }}', {

@@ -23,5 +23,6 @@ class HistoryLikeSuspensi extends Model
         'harga_suspensi',
         'ukuran_suspensi',
         'warna_suspensi',
+        'gambar_suspensi',
     ];
 }

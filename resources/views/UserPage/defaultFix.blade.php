@@ -64,10 +64,8 @@ https://templatemo.com/tm-568-digimedia
         </div>
         <div class="col-lg-4 col-sm-4 col-5">
           <ul class="social-media">
-            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="#"><i class="fa fa-behance"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+            <li><a href="{{ route('logoutUser') }}"><i class="bi bi-box-arrow-right"></i></a></li>
+            <li><p>Logout</p></li>
           </ul>
         </div>
       </div>
@@ -95,14 +93,14 @@ https://templatemo.com/tm-568-digimedia
                     <a href="{{ route('etalaseVelg') }}" class="{{ request()->routeIs('etalaseVelg') ? 'active' : '' }}">Velg</a>
                 </li>
                 <li class="scroll-to-section">
-                    <a href="{{ route('etalaseBan') }}" class="{{ request()->is('etalaseBan') ? 'active' : '' }}">Tire</a>
+                    <a href="{{ route('etalaseBan') }}" class="{{ request()->routeIs('etalaseBan') ? 'active' : '' }}">Tire</a>
                 </li>
                 <li class="scroll-to-section">
-                    <a href="{{ route('etalaseSuspensi') }}" class="{{ request()->is('etalaseSuspensi') ? 'active' : '' }}">Suspension</a>
+                    <a href="{{ route('etalaseSuspensi') }}" class="{{ request()->routeIs('etalaseSuspensi') ? 'active' : '' }}">Suspension</a>
                 </li>
 
                 <li class="scroll-to-section">
-                    <a href="{{ route('logoutUser') }}" class="{{ request()->is('logoutUser') ? 'active' : '' }}">Logout</a>
+                    <a href="{{ route('historyLike') }}" class="{{ request()->routeIs('historyLike') ? 'active' : '' }}">History Like</a>
                 </li>
 
                 <li class="scroll-to-section">

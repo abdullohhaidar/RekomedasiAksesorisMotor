@@ -17,6 +17,7 @@ class HistoryLikeVelgController extends Controller
             'ukuran_velg',
             'material_velg',
             'warna_velg',
+            'gambar_velg',
         ]);
 
         $existing = HistoryLikeVelg::where('id_user', $id_user)
@@ -25,6 +26,7 @@ class HistoryLikeVelgController extends Controller
             ->where('ukuran_velg', $data['ukuran_velg'])
             ->where('material_velg', $data['material_velg'])
             ->where('warna_velg', $data['warna_velg'])
+            ->where('gambar_velg', $data['gambar_velg'])
             ->first();
 
         if ($existing) {

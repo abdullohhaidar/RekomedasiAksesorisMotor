@@ -16,6 +16,7 @@ class HistoryLikeSuspensiController extends Controller
             'harga_suspensi',
             'ukuran_suspensi',
             'warna_suspensi',
+            'gambar_suspensi',
         ]);
 
         $existing = HistoryLikeSuspensi::where('id_user', $id_user)
@@ -23,6 +24,7 @@ class HistoryLikeSuspensiController extends Controller
             ->where('harga_suspensi', $data['harga_suspensi'])
             ->where('ukuran_suspensi', $data['ukuran_suspensi'])
             ->where('warna_suspensi', $data['warna_suspensi'])
+            ->where('gambar_suspensi', $data['gambar_suspensi'])
             ->first();
 
         if ($existing) {

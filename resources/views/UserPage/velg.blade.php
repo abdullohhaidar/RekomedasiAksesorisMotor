@@ -13,6 +13,7 @@
                 
                 <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
                 </div>
+                
 
             </div>
             </div>

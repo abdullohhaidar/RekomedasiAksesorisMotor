@@ -23,5 +23,6 @@ class HistoryLikeBan extends Model
         'harga_ban',
         'ukuran_ban',
         'tipe_ban',
+        'gambar_ban',
     ];
 }

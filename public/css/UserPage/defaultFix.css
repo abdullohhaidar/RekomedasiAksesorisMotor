@@ -1365,7 +1365,7 @@ Services Style
   left: 0;
   top: 0px;
   width: 786px;
-  height: 1117px;
+  height: 1077px;
   z-index: 0;
 }
 
@@ -1379,6 +1379,13 @@ Services Style
   width: 161px;
   height: 413px;
   z-index: 0;
+}
+
+.services .container {
+    width: 100%;
+    justify-self: center;
+    padding: 0;
+    margin: 0;
 }
 
 .services .section-heading {
@@ -1471,7 +1478,7 @@ Services Style
   box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
   background-color: #fff;
   border-radius: 15px;
-  padding: 80px 120px 50px 120px;
+  padding: 20px 20px 20px 20px;
 }
 
 .services ul.nacc li {
@@ -1697,6 +1704,57 @@ Portfolio
   z-index: 222;
 }
 
+/* 
+---------------------------------------------
+History like
+--------------------------------------------- 
+*/
+
+.our-portfolio-history {
+  padding-top: 130px;
+  overflow: hidden;
+  position: relative;
+}
+
+.our-portfolio-history:before {
+  content: '';
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 0;
+  top: 0px;
+  width: 414px;
+  height: 861px;
+  z-index: 1;
+}
+
+.our-portfolio-history:after {
+  content: '';
+
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  width: 677px;
+  height: 759px;
+  z-index: 1;
+}
+
+.our-portfolio-history .section-heading {
+  margin-bottom: 80px;
+}
+
+.our-portfolio-history .container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  position: relative;
+  z-index: 2;
+}
+
+.our-portfolio-history .item {
+  position: relative;
+  z-index: 222;
+}
+
 .portfolio-item {
   border-radius: 25px;
   box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
@@ -1741,7 +1799,7 @@ Portfolio
   transition: all .3s;
 }
 
-.our-portfolio .owl-nav {
+.our-portfolio-history .owl-nav {
   display: inline-block!important;
   position: absolute;
   top: -125px;
@@ -1749,11 +1807,11 @@ Portfolio
   max-width: 1320px;
 }
 
-.our-portfolio .owl-nav .owl-next {
+.our-portfolio-history .owl-nav .owl-next {
   margin-left: 10px;
 }
 
-.our-portfolio .owl-nav span {
+.our-portfolio-history .owl-nav span {
   width: 46px;
   height: 46px;
   display: inline-block;
@@ -1766,7 +1824,7 @@ Portfolio
   transition: all 0.5s;
 }
 
-.our-portfolio .owl-nav span:hover {
+.our-portfolio-history .owl-nav span:hover {
   color: #fff;
   background-color: #fa65b1;
 }

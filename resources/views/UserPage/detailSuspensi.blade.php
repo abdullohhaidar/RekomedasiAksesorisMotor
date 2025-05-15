@@ -36,6 +36,7 @@
                                     data-harga="{{ $dataDSuspensi->harga_suspensi }}"
                                     data-ukuran="{{ $dataDSuspensi->ukuran_suspensi }}"
                                     data-warna="{{ $dataDSuspensi->warna_suspensi }}"
+                                    data-gambar="{{ $dataDSuspensi->gambar_suspensi }}"
                                     class="btn p-4 rounded-circle" style="background-color: white; border: none; box-shadow: none;">
                                     <i id="heartIcon" class="bi {{ $liked ? 'bi-heart-fill text-danger' : 'bi-heart text-secondary' }}" style="font-size: 2.5rem;"></i>
                                 </button>
@@ -113,6 +114,7 @@ function toggleLikeSuspensi(button) {
         harga_suspensi: button.getAttribute('data-harga'),
         ukuran_suspensi: button.getAttribute('data-ukuran'),
         warna_suspensi: button.getAttribute('data-warna'),
+        gambar_suspensi: button.getAttribute('data-gambar'),
     };
 
     fetch('{{ route('toggle.like.suspensi') }}', {

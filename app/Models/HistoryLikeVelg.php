@@ -24,5 +24,6 @@ class HistoryLikeVelg extends Model
         'ukuran_velg',
         'material_velg',
         'warna_velg',
+        'gambar_velg',
     ];
 }

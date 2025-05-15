@@ -16,6 +16,7 @@ class HistoryLikeBanController extends Controller
             'harga_ban',
             'ukuran_ban',
             'tipe_ban',
+            'gambar_ban',
         ]);
 
         $existing = HistoryLikeBan::where('id_user', $id_user)
@@ -23,6 +24,7 @@ class HistoryLikeBanController extends Controller
             ->where('harga_ban', $data['harga_ban'])
             ->where('ukuran_ban', $data['ukuran_ban'])
             ->where('tipe_ban', $data['tipe_ban'])
+            ->where('gambar_ban', $data['gambar_ban'])
             ->first();
 
         if ($existing) {

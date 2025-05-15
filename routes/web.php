@@ -17,6 +17,7 @@ use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\HistoryLikeVelgController;
 use App\Http\Controllers\HistoryLikeBanController;
 use App\Http\Controllers\HistoryLikeSuspensiController;
+use App\Http\Controllers\HistoryLikeController;
 
 
 /*
@@ -46,7 +47,7 @@ Route::post('/register', [RegisterUserController::class, 'registerUser'])->name(
 
 Route::get('/', function () {
     return view('UserPage.halamanUtama');
-})->name('home');;
+})->name('home');
 
 // Route::get('/velg', function () {
 //     return view('UserPage.velg');
@@ -69,6 +70,11 @@ Route::post('/toggle-like-ban', [HistoryLikeBanController::class, 'toggleLike'])
 Route::get('/etalase/suspensi', [EtalaseSuspensiController::class, 'index'])->name('etalaseSuspensi');
 Route::get('/etalase/suspensi/detail/{id}', [EtalaseSuspensiController::class, 'show'])->name('detailESuspensi');
 Route::post('/toggle-like-suspensi', [HistoryLikeSuspensiController::class, 'toggleLike'])->name('toggle.like.suspensi');
+
+Route::get('/historyLike', [HistoryLikeController::class, 'index'])->name('historyLike');
+Route::delete('/historyLike/ban/{id}', [HistoryLikeController::class, 'deleteBan'])->name('historyLikeBan.delete');
+Route::delete('/historyLike/velg/{id}', [HistoryLikeController::class, 'deleteVelg'])->name('historyLikeVelg.delete');
+Route::delete('/historyLike/suspensi/{id}', [HistoryLikeController::class, 'deleteSuspensi'])->name('historyLikeSuspensi.delete');
 
 Route::get('/detailVelg', function () {
     return view('UserPage.detailVelg');
