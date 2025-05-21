@@ -62,15 +62,75 @@
         </div>
 
         @if($dataRekomVelg->isEmpty() && $dataRekomBan->isEmpty() && $dataRekomSuspensi->isEmpty())
-            <p class="text-center">Silakan isi form rekomendasi terlebih dahulu.</p>
-        @endif
-
-        {{-- Rekomendasi Velg --}}
-        @if($dataRekomVelg->isNotEmpty())
+            {{-- Kalau data dari form kosong, tampilkan rekomendasi history like --}}
             <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="loop owl-carousel">
+
+                            {{-- Rekomendasi Velg dari history --}}
+                            @foreach($rekomendasiVelg as $velg)
+                                <div class="item">
+                                    <a href="{{ route('detailEVelg', ['id' => $velg->id_velg]) }}">
+                                        <div class="portfolio-item">
+                                            <div class="thumb">
+                                                <img src="{{ asset('storage/images/velg/' . $velg->gambar_velg) }}" alt="{{ $velg->nama_velg }}">
+                                            </div>
+                                            <div class="down-content">
+                                                <h4>{{ $velg->nama_velg }}</h4>
+                                                <span>Rp. {{ number_format($velg->harga_velg, 0, ',', '.') }}</span>
+                                            </div>
+                                        </div>
+                                    </a>  
+                                </div>
+                            @endforeach
+
+                            {{-- Rekomendasi Ban dari history --}}
+                            @foreach($rekomendasiBan as $ban)
+                                <div class="item">
+                                    <a href="{{ route('detailEBan', ['id' => $ban->id_ban]) }}">
+                                        <div class="portfolio-item">
+                                            <div class="thumb">
+                                                <img src="{{ asset('storage/images/ban/' . $ban->gambar_ban) }}" alt="{{ $ban->nama_ban }}">
+                                            </div>
+                                            <div class="down-content">
+                                                <h4>{{ $ban->nama_ban }}</h4>
+                                                <span>Rp. {{ number_format($ban->harga_ban, 0, ',', '.') }}</span>
+                                            </div>
+                                        </div>
+                                    </a>  
+                                </div>
+                            @endforeach
+
+                            {{-- Rekomendasi Suspensi dari history --}}
+                            @foreach($rekomendasiSuspensi as $suspensi)
+                                <div class="item">
+                                    <a href="{{ route('detailESuspensi', ['id' => $suspensi->id_suspensi]) }}">
+                                        <div class="portfolio-item">
+                                            <div class="thumb">
+                                                <img src="{{ asset('storage/images/suspensi/' . $suspensi->gambar_suspensi) }}" alt="{{ $suspensi->nama_suspensi }}">
+                                            </div>
+                                            <div class="down-content">
+                                                <h4>{{ $suspensi->nama_suspensi }}</h4>
+                                                <span>Rp. {{ number_format($suspensi->harga_suspensi, 0, ',', '.') }}</span>
+                                            </div>
+                                        </div>
+                                    </a>  
+                                </div>
+                            @endforeach
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @else
+            {{-- Kalau data dari form ada, tampilkan data rekomendasi dari form --}}
+            <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="loop owl-carousel">
+
+                            {{-- Rekomendasi Velg dari form --}}
                             @foreach($dataRekomVelg as $velg)
                                 <div class="item">
                                     <a href="{{ route('detailEVelg', ['id' => $velg->id_velg]) }}">
@@ -86,63 +146,47 @@
                                     </a>  
                                 </div>
                             @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
 
-        {{-- Rekomendasi Ban --}}
-        @if($dataRekomBan->isNotEmpty())
-            <h4 class="text-center mt-5 mb-4">Rekomendasi Ban</h4>
-            <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="loop owl-carousel">
+                            {{-- Rekomendasi Ban dari form --}}
                             @foreach($dataRekomBan as $ban)
                                 <div class="item">
-                                    <div class="portfolio-item">
-                                        <div class="thumb">
-                                            <img src="{{ asset('storage/images/ban/' . $ban->gambar_ban) }}" alt="{{ $ban->nama_ban }}">
+                                    <a href="{{ route('detailEBan', ['id' => $ban->id_ban]) }}">
+                                        <div class="portfolio-item">
+                                            <div class="thumb">
+                                                <img src="{{ asset('storage/images/ban/' . $ban->gambar_ban) }}" alt="{{ $ban->nama_ban }}">
+                                            </div>
+                                            <div class="down-content">
+                                                <h4>{{ $ban->nama_ban }}</h4>
+                                                <span>Rp. {{ number_format($ban->harga_ban, 0, ',', '.') }}</span>
+                                            </div>
                                         </div>
-                                        <div class="down-content">
-                                            <h4>{{ $ban->nama_ban }}</h4>
-                                            <span>Rp. {{ number_format($ban->harga_ban, 0, ',', '.') }}</span>
-                                        </div>
-                                    </div>
+                                    </a>  
                                 </div>
                             @endforeach
+
+                            {{-- Rekomendasi Suspensi dari form --}}
+                            @foreach($dataRekomSuspensi as $suspensi)
+                                <div class="item">
+                                    <a href="{{ route('detailESuspensi', ['id' => $suspensi->id_suspensi]) }}">
+                                        <div class="portfolio-item">
+                                            <div class="thumb">
+                                                <img src="{{ asset('storage/images/suspensi/' . $suspensi->gambar_suspensi) }}" alt="{{ $suspensi->nama_suspensi }}">
+                                            </div>
+                                            <div class="down-content">
+                                                <h4>{{ $suspensi->nama_suspensi }}</h4>
+                                                <span>Rp. {{ number_format($suspensi->harga_suspensi, 0, ',', '.') }}</span>
+                                            </div>
+                                        </div>
+                                    </a>  
+                                </div>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
             </div>
         @endif
 
-        {{-- Rekomendasi Suspensi --}}
-        @if($dataRekomSuspensi->isNotEmpty())
-            <h4 class="text-center mt-5 mb-4">Rekomendasi Suspensi</h4>
-            <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.7s">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="loop owl-carousel">
-                            @foreach($dataRekomSuspensi as $suspensi)
-                                <div class="item">
-                                    <div class="portfolio-item">
-                                        <div class="thumb">
-                                            <img src="{{ asset('storage/images/suspensi/' . $suspensi->gambar_suspensi) }}" alt="{{ $suspensi->nama_suspensi }}">
-                                        </div>
-                                        <div class="down-content">
-                                            <h4>{{ $suspensi->nama_suspensi }}</h4>
-                                            <span>Rp. {{ number_format($suspensi->harga_suspensi, 0, ',', '.') }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
 
         
     </div>

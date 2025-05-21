@@ -91,6 +91,7 @@ Route::get('/detailSuspensi', function () {
 // Route::get('/rekomendasi', function () {
 //     return view('UserPage.rekomendasi');
 // })->name('rekomendasi');
+// Route::get('/rekomendasiLike', [RekomendasiController::class, 'index'])->name('rekomendasi.index');
 Route::get('/rekomendasi', [RekomendasiController::class, 'showRekomendasiForm'])->name('rekomendasi');
 Route::post('/rekomendasi/velg', [RekomendasiController::class, 'filterVelg'])->name('rekomendasi.velg');
 Route::post('/rekomendasi/ban', [RekomendasiController::class, 'filterBan'])->name('rekomendasi.ban');

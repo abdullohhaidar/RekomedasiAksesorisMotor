@@ -31,6 +31,11 @@
                     <div class="down-content">
                         <span class="category">Rp. {{ number_format($dataDVelg->harga_velg, 0, ',', '.') }}</span>
                         <span class="date" style="margin-top: 50px;">
+
+                            <a href="https://shopee.co.id" target="_blank" class="btn p-4 rounded-circle"
+                                style="background-color: white; border: none; box-shadow: none;">
+                                <i class="bi bi-cart3 text-warning" style="font-size: 2.5rem;"></i>
+                            </a>
                             <button id="likeButton" onclick="toggleLikeVelg(this)" 
                                 data-merk="{{ $dataDVelg->merk_velg }}"
                                 data-harga="{{ $dataDVelg->harga_velg }}"
@@ -41,6 +46,8 @@
                                 class="btn p-4 rounded-circle" style="background-color: white; border: none; box-shadow: none;">
                                 <i id="heartIcon" class="bi {{ $liked ? 'bi-heart-fill text-danger' : 'bi-heart text-secondary' }}" style="font-size: 2.5rem;"></i>
                             </button>
+                            
+                            
                         </span>
                         <a href="#"><h4>{{ $dataDVelg->nama_velg }}</h4></a>
                         <p>{{ $dataDVelg->merk_velg }}</p>
