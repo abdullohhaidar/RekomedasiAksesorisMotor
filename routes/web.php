@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\SuspensiController;
 use App\Http\Controllers\Admin\KategoriVelgController;
 use App\Http\Controllers\Admin\KategoriSuspensiController;
 use App\Http\Controllers\Admin\KategoriBanController;
+use App\Http\Controllers\Admin\FrekuensiController;
+use App\Http\Controllers\Admin\ContentBasedFilteringController;
 use App\Http\Controllers\EtalaseBanController;
 use App\Http\Controllers\EtalaseSuspensiController;
 use App\Http\Controllers\EtalaseVelgController;
@@ -135,6 +137,12 @@ Route::post('/katBan/input', [KategoriBanController::class, 'store'])->name('kat
 Route::get('/katBan/{id}', [KategoriBanController::class, 'show'])->name('katBan.show');
 Route::put('/katBan/update/{id}', [KategoriBanController::class, 'update'])->name('katBan.update');
 Route::delete('/katBan/{id}', [KategoriBanController::class, 'destroy'])->name('katBan.destroy');
+
+// Frekuensi
+Route::get('/adminFrekuensi', [FrekuensiController::class, 'index'])->name('adminFrekuensi');
+
+// Content based Filtering
+Route::get('/adminCBF', [ContentBasedFilteringController::class, 'index'])->name('adminCBF');
 
 // Velg
 // Route::get('/adminTableVelg', function () {

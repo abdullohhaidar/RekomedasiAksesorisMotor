@@ -41,7 +41,7 @@ class RekomendasiController extends Controller
         $dataRekomBan = collect();
         $dataRekomSuspensi = collect();
 
-        $formIsFilled = $request->hasAny(['merk_velg', 'ukuran_velg', 'merk_ban', 'ukuran_ban', 'merk_suspensi']);
+        $formIsFilled = $request->hasAny(['merk_velg', 'ukuran_velg', 'merk_ban', 'ukuran_ban', 'merk_suspensi','ukuran_suspensi']);
 
         if ($formIsFilled) {
             // Filter manual via form
@@ -66,6 +66,9 @@ class RekomendasiController extends Controller
             $querySuspensi = Suspensi::query();
             if ($request->filled('merk_suspensi')) {
                 $querySuspensi->where('merk_suspensi', $request->merk_suspensi);
+            }
+            if ($request->filled('ukuran_suspensi')) {
+                $querySuspensi->where('ukuran_suspensi', $request->merk_suspensi);
             }
             $dataRekomSuspensi = $querySuspensi->get();
 
@@ -124,7 +127,7 @@ class RekomendasiController extends Controller
                 });
 
                 // Filter hanya yang skor >= 0.2 lalu ambil 5 teratas
-                $rekomendasiVelg = filterByMinScore($rekomendasiVelg, 0.5)->sortByDesc('score')->take(5);
+                $rekomendasiVelg = filterByMinScore($rekomendasiVelg, 0.2)->sortByDesc('score');
 
                 // Rekomendasi Ban
                 $semuaBan = Ban::all();
@@ -137,7 +140,7 @@ class RekomendasiController extends Controller
                     $ban->score = $totalBobot > 0 ? round($score / $totalBobot, 3) : 0;
                     return $ban;
                 });
-                $rekomendasiBan = filterByMinScore($rekomendasiBan, 0.5)->sortByDesc('score')->take(5);
+                $rekomendasiBan = filterByMinScore($rekomendasiBan, 0.2)->sortByDesc('score');
 
                 // Rekomendasi Suspensi
                 $semuaSuspensi = Suspensi::all();
@@ -150,7 +153,7 @@ class RekomendasiController extends Controller
                     $suspensi->score = $totalBobot > 0 ? round($score / $totalBobot, 3) : 0;
                     return $suspensi;
                 });
-                $rekomendasiSuspensi = filterByMinScore($rekomendasiSuspensi, 0.5)->sortByDesc('score')->take(5);
+                $rekomendasiSuspensi = filterByMinScore($rekomendasiSuspensi, 0.2)->sortByDesc('score');
             }
         }
 
@@ -164,6 +167,8 @@ class RekomendasiController extends Controller
         //     'rekomendasiVelg' => $rekomendasiVelg,
         //     'rekomendasiBan' => $rekomendasiBan,
         //     'rekomendasiSuspensi' => $rekomendasiSuspensi,
+        //     'keywordFrekuensi' => $keywordFrekuensi,
+        //     'totalBobot' => $totalBobot,
         // ]);
 
         return view('UserPage.rekomendasi', compact(

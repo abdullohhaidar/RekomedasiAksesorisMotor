@@ -79,6 +79,7 @@
                                             <div class="down-content">
                                                 <h4>{{ $velg->nama_velg }}</h4>
                                                 <span>Rp. {{ number_format($velg->harga_velg, 0, ',', '.') }}</span>
+                                                <p>score : {{ $velg->score }}</p>
                                             </div>
                                         </div>
                                     </a>  
@@ -96,6 +97,7 @@
                                             <div class="down-content">
                                                 <h4>{{ $ban->nama_ban }}</h4>
                                                 <span>Rp. {{ number_format($ban->harga_ban, 0, ',', '.') }}</span>
+                                                <p>score : {{ $ban->score }}</p>
                                             </div>
                                         </div>
                                     </a>  
@@ -113,6 +115,7 @@
                                             <div class="down-content">
                                                 <h4>{{ $suspensi->nama_suspensi }}</h4>
                                                 <span>Rp. {{ number_format($suspensi->harga_suspensi, 0, ',', '.') }}</span>
+                                                <p>score : {{ $suspensi->score }}</p>
                                             </div>
                                         </div>
                                     </a>  
