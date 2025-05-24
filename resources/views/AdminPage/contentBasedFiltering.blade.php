@@ -14,7 +14,6 @@
                 <form method="GET" action="{{ route('adminCBF') }}">
                     <label for="user_id">Pilih User:</label>
                     <select name="user_id" id="user_id" onchange="this.form.submit()" class="form-select mb-4">
-                        <option value="">-- Semua User --</option>
                         @foreach ($users as $user)
                             <option value="{{ $user->id_user }}" {{ request('user_id') == $user->id_user ? 'selected' : '' }}>
                                 {{ $user->username }}

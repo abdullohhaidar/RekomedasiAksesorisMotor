@@ -11,6 +11,11 @@ class HistoryLikeBanController extends Controller
      public function toggleLike(Request $request)
     {
         $id_user = session('id_user'); // atau Auth::id() jika pakai auth
+        // Cek apakah user sudah login
+        if (!$id_user) {
+            return response()->json(['error' => 'unauthenticated'], 401); // status 401 = Unauthorized
+        }
+        
         $data = $request->only([
             'merk_ban',
             'harga_ban',

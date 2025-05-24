@@ -18,7 +18,7 @@ class RegisterUserController extends Controller
         $request->validate([
             'username' => 'required|string|unique:akun_user,username',
             'email' => 'required|email|unique:akun_user,email',
-            'no_hp' => 'required|string',
+            'no_hp' => 'required|digits_between:12,15|unique:akun_user,no_hp|regex:/^[0-9]+$/',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
@@ -29,6 +29,6 @@ class RegisterUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->intended('/login')->with('success', 'Akun berhasil dibuat. Selamat datang, ' . $user->username);
+        return redirect()->intended('/login')->with('success', 'Akun berhasil dibuat' . $user->username);
     }
 }

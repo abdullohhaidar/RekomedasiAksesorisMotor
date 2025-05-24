@@ -125,7 +125,14 @@ function toggleLikeSuspensi(button) {
         },
         body: JSON.stringify(data)
     })
-    .then(res => res.json())
+    .then(res => {
+        if (res.status === 401) {
+            // Redirect ke halaman login
+            window.location.href = "{{ route('login') }}";
+            return;
+        }
+        return res.json();
+    })
     .then(response => {
         if (response.liked) {
             icon.classList.remove('bi-heart');
