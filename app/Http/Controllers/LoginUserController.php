@@ -41,12 +41,12 @@ class LoginUserController extends Controller
     }
 
     public function logoutUser(Request $request)
-{
-    // Hapus semua data session
-    $request->session()->flush();
+    {
+        // Hapus semua data session
+        $request->session()->flush();
 
-    // Redirect ke halaman login
-    return redirect()->route('loginUser')->with('success', 'Berhasil logout.');
-}
+        // Redirect ke halaman login
+        return redirect()->route('loginUser')->with('success', 'Berhasil logout.');
+    }
 
 }

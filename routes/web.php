@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\KategoriSuspensiController;
 use App\Http\Controllers\Admin\KategoriBanController;
 use App\Http\Controllers\Admin\FrekuensiController;
 use App\Http\Controllers\Admin\ContentBasedFilteringController;
+use App\Http\Controllers\Admin\LoginAdminController;
 use App\Http\Controllers\EtalaseBanController;
 use App\Http\Controllers\EtalaseSuspensiController;
 use App\Http\Controllers\EtalaseVelgController;
@@ -108,6 +109,9 @@ Route::get('/admin', function () {
 })->name('defaultAdmin');
 
 //Admin Page
+
+Route::get('/loginAdmin', [LoginAdminController::class, 'index'])->name('loginAdmin');
+Route::post('/loginAdmin', [LoginAdminController::class, 'loginAdmin'])->name('goLogin');
 
 Route::get('/adminFix', function () {
     return view('AdminPage.defaultFix');

@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Login User</title>
+    <title>Login Admin</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../assets/vendors/ti-icons/css/themify-icons.css">
@@ -30,9 +30,9 @@
                 <div class="brand-logo">
                   <img src="../../assets/images/logo.svg">
                 </div>
-                <h4>Hello! let's get started</h4>
+                <h4>Hello! Admin Silahkan Login</h4>
                 <h6 class="font-weight-light">Sign in to continue.</h6>
-                <form class="pt-3" method="POST" action="{{ route('login') }}">
+                <form class="pt-3" method="POST" action="{{ route('loginAdmin') }}">
                     @csrf
                     <div class="form-group">
                         <input type="text" name="username" class="form-control form-control-lg" placeholder="Username" required>
@@ -52,9 +52,6 @@
                         <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                     </div>
 
-                    <div class="text-center mt-4 font-weight-light">
-                        Don't have an account? <a href="{{ route('registerUser') }}" class="text-primary">Create</a>
-                    </div>
                 </form>
               </div>
             </div>
