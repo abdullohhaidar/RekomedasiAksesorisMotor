@@ -80,8 +80,8 @@ https://templatemo.com/tm-568-digimedia
         <div class="col-12">
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
-            <a href="index.html" class="logo">
-              <img src="{{ asset('images/logo-v1.png') }}" alt="">
+            <a href="{{ route('home') }}" class="logo">
+              <img src="{{ asset('images/logo_king.jpg') }}" alt="">
             </a>
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->

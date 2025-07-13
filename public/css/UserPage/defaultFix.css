@@ -1053,6 +1053,7 @@ Banner Style
 
 .main-banner .right-image img {
   max-width: 593px;
+  border-radius: 20px;
 }
 
 /* 
@@ -1102,6 +1103,7 @@ About Style
 
 .about-left-image img {
   margin-right: 45px;
+  border-radius: 20px;
 }
 
 .about-right-content p {
@@ -2348,4 +2350,12 @@ responsive
   form#contact {
     padding: 30px;
   }
+}
+
+
+.card-footer {
+    padding: 0.5rem 1rem;
+    background-color: #f8f9fa;
+    border-top: 2px solid #bf10e2;
+    text-align: center;
 }

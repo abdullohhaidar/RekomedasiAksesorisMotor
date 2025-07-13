@@ -31,6 +31,12 @@
                         <div class="down-content">
                             <span class="category">Rp. {{ number_format($dataDSuspensi->harga_suspensi, 0, ',', '.') }}</span>
                             <span class="date" style="margin-top: 50px;">
+
+                                <a href="https://shopee.co.id" target="_blank" class="btn p-4 rounded-circle"
+                                style="background-color: white; border: none; box-shadow: none;">
+                                <i class="bi bi-cart3 text-warning" style="font-size: 2.5rem;"></i>
+                                </a>
+                                
                                 <button id="likeButton" onclick="toggleLikeSuspensi(this)" 
                                     data-merk="{{ $dataDSuspensi->merk_suspensi }}"
                                     data-harga="{{ $dataDSuspensi->harga_suspensi }}"

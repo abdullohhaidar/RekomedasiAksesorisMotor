@@ -90,7 +90,7 @@ class RekomendasiController extends Controller
             } else {
                 // Gabungkan keyword dari semua history like
                 $keywordFrekuensi = [];
-
+                // mengambil semua keyword dan mengubah menjadi bobot pada history like 
                 foreach ($historyVelg as $item) {
                     $fitur = [$item->merk_velg, $item->ukuran_velg, $item->material_velg, $item->warna_velg];
                     foreach ($fitur as $val) {
@@ -113,7 +113,8 @@ class RekomendasiController extends Controller
                 }
 
                 $totalBobot = array_sum($keywordFrekuensi);
-
+                // Melakukan pembobotan semua aksesoris motor mulai dari ban, velg dan suspensi sesuai bobot/frekuensi pada history like 
+                // lalu membagi kedua bobot tersebut untuk menghasilkan score per aksesoris
                 // Rekomendasi Velg
                 $semuaVelg = Velg::all();
                 $rekomendasiVelg = $semuaVelg->map(function ($velg) use ($keywordFrekuensi, $totalBobot) {
@@ -126,8 +127,8 @@ class RekomendasiController extends Controller
                     return $velg;
                 });
 
-                // Filter hanya yang skor >= 0.2 lalu ambil 5 teratas
-                $rekomendasiVelg = filterByMinScore($rekomendasiVelg, 0.2)->sortByDesc('score');
+               
+                $rekomendasiVelg = filterByMinScore($rekomendasiVelg, 0.2)->sortByDesc('score')->take(5);
 
                 // Rekomendasi Ban
                 $semuaBan = Ban::all();
@@ -140,7 +141,7 @@ class RekomendasiController extends Controller
                     $ban->score = $totalBobot > 0 ? round($score / $totalBobot, 3) : 0;
                     return $ban;
                 });
-                $rekomendasiBan = filterByMinScore($rekomendasiBan, 0.2)->sortByDesc('score');
+                $rekomendasiBan = filterByMinScore($rekomendasiBan, 0.2)->sortByDesc ('score')->take(5);
 
                 // Rekomendasi Suspensi
                 $semuaSuspensi = Suspensi::all();
@@ -153,7 +154,7 @@ class RekomendasiController extends Controller
                     $suspensi->score = $totalBobot > 0 ? round($score / $totalBobot, 3) : 0;
                     return $suspensi;
                 });
-                $rekomendasiSuspensi = filterByMinScore($rekomendasiSuspensi, 0.2)->sortByDesc('score');
+                $rekomendasiSuspensi = filterByMinScore($rekomendasiSuspensi, 0.2)->sortByDesc('score')->take(5);
             }
         }
 
@@ -171,6 +172,8 @@ class RekomendasiController extends Controller
         //     'totalBobot' => $totalBobot,
         // ]);
 
+        
+
         return view('UserPage.rekomendasi', compact(
             'kategoriVelg',
             'kategoriBan',
@@ -178,7 +181,7 @@ class RekomendasiController extends Controller
             'dataRekomVelg',
             'dataRekomBan',
             'dataRekomSuspensi',
-            'rekomendasiVelg',
+            'rekomendasiVelg' , 
             'rekomendasiBan',
             'rekomendasiSuspensi'
         ));

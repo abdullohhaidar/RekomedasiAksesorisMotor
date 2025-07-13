@@ -69,7 +69,7 @@ class ContentBasedFilteringController extends Controller
                 'keyword_cocok' => implode(', ', $cocok),
                 'score' => $totalBobot > 0 ? round($score / $totalBobot, 3) : 0,
             ];
-        });
+        })->sortByDesc('score')->values();
 
         $rekomendasiBan = Ban::all()->map(function ($item) use ($keywordFrekuensi, $totalBobot) {
             $fitur = [$item->merk_ban, $item->ukuran_ban, $item->tipe_ban];
@@ -83,7 +83,7 @@ class ContentBasedFilteringController extends Controller
                 'keyword_cocok' => implode(', ', $cocok),
                 'score' => $totalBobot > 0 ? round($score / $totalBobot, 3) : 0,
             ];
-        });
+        })->sortByDesc('score')->values();
 
         $rekomendasiSuspensi = Suspensi::all()->map(function ($item) use ($keywordFrekuensi, $totalBobot) {
             $fitur = [$item->merk_suspensi, $item->ukuran_suspensi, $item->warna_suspensi];
@@ -97,7 +97,7 @@ class ContentBasedFilteringController extends Controller
                 'keyword_cocok' => implode(', ', $cocok),
                 'score' => $totalBobot > 0 ? round($score / $totalBobot, 3) : 0,
             ];
-        });
+        })->sortByDesc('score')->values();
 
         return view('AdminPage.contentBasedFiltering', compact(
             'rekomendasiVelg',

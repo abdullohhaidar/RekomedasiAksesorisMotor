@@ -47,117 +47,102 @@
             </div>
         </div>
     </div>
-
+    <!-- Rekomendasi V1 1 layer untuk 3 kategori -->
     <div id="portfolio" class="our-portfolio section">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="section-heading wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
-                        <h6>Our Recommendation</h6>
-                        <h4>Modification Accessories</h4>
-                        <div class="line-dec"></div>
+        <div class="row">
+            <div class="col-lg-6">
+            <div class="section-heading wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.3s">
+                <h6>Our Recomendation</h6>
+                <h4>modification accessories</h4>
+                <div class="line-dec"></div>
+            </div>
+            </div>
+        </div>
+        </div>
+        
+        
+
+        @if($dataRekomVelg->isEmpty() && $dataRekomBan->isEmpty() && $dataRekomSuspensi->isEmpty())
+            {{-- Kalau data dari form kosong, tampilkan rekomendasi history like --}}
+            <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="loop owl-carousel">
+
+                            {{-- Rekomendasi Velg dari history --}}
+                            @php $noVelg = 1; @endphp
+                            @foreach($rekomendasiVelg as $velg)
+                                <div class="item">
+                                    <a href="{{ route('detailEVelg', ['id' => $velg->id_velg]) }}">
+                                        <div class="portfolio-item">
+                                            <div class="thumb">
+                                                <img src="{{ asset('storage/images/velg/' . $velg->gambar_velg) }}" alt="{{ $velg->nama_velg }}">
+                                            </div>
+                                            <div class="down-content">
+                                                <h4>{{ $velg->nama_velg }}</h4>
+                                                <span>Rp. {{ number_format($velg->harga_velg, 0, ',', '.') }}</span>
+                                                <!-- <p>score : {{ $velg->score }}</p> -->
+                                            </div>
+
+                                            <div class="card-footer">
+                                                <small class="text-body">Rekomendasi Velg #{{ $noVelg++ }}</small>
+                                            </div>
+                                        </div>
+                                    </a>  
+                                </div>
+                            @endforeach
+
+                            {{-- Rekomendasi Ban dari history --}}
+                            @php $noBan = 1; @endphp
+                            @foreach($rekomendasiBan as $ban)
+                                <div class="item">
+                                    <a href="{{ route('detailEBan', ['id' => $ban->id_ban]) }}">
+                                        <div class="portfolio-item">
+                                            <div class="thumb">
+                                                <img src="{{ asset('storage/images/ban/' . $ban->gambar_ban) }}" alt="{{ $ban->nama_ban }}">
+                                            </div>
+                                            <div class="down-content">
+                                                <h4>{{ $ban->nama_ban }}</h4>
+                                                <span>Rp. {{ number_format($ban->harga_ban, 0, ',', '.') }}</span>
+                                                <!-- <p>score : {{ $ban->score }}</p> -->
+                                            </div>
+
+                                            <div class="card-footer">
+                                                <small class="text-body"> Rekomendasi Ban #{{ $noBan++ }}</small>
+                                            </div>
+                                        </div>
+                                    </a>  
+                                </div>
+                            @endforeach
+
+                            {{-- Rekomendasi Suspensi dari history --}}
+                            @php $noSuspensi = 1; @endphp
+                            @foreach($rekomendasiSuspensi as $suspensi)
+                                <div class="item">
+                                    <a href="{{ route('detailESuspensi', ['id' => $suspensi->id_suspensi]) }}">
+                                        <div class="portfolio-item">
+                                            <div class="thumb">
+                                                <img src="{{ asset('storage/images/suspensi/' . $suspensi->gambar_suspensi) }}" alt="{{ $suspensi->nama_suspensi }}">
+                                            </div>
+                                            <div class="down-content">
+                                                <h4>{{ $suspensi->nama_suspensi }}</h4>
+                                                <span>Rp. {{ number_format($suspensi->harga_suspensi, 0, ',', '.') }}</span>
+                                                <!-- <p>score : {{ $suspensi->score }}</p> -->
+                                            </div>
+
+                                            <div class="card-footer">
+                                                <small class="text-body">Rekomendasi Suspensi #{{ $noSuspensi++ }}</small>
+                                            </div>
+                                        </div>
+                                    </a>  
+                                </div>
+                            @endforeach
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        @if($dataRekomVelg->isEmpty() && $dataRekomBan->isEmpty() && $dataRekomSuspensi->isEmpty())
-
-            {{-- === Layer Velg === --}}
-            @if(!$rekomendasiVelg->isEmpty())
-                <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s">
-                    <h5 class="mb-3">Rekomendasi Velg</h5>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="loop owl-carousel">
-                                @php $noVelg = 1; @endphp
-                                @foreach($rekomendasiVelg as $velg)
-                                    <div class="item">
-                                        <a href="{{ route('detailEVelg', ['id' => $velg->id_velg]) }}">
-                                            <div class="portfolio-item">
-                                                <div class="thumb">
-                                                    <img src="{{ asset('storage/images/velg/' . $velg->gambar_velg) }}" alt="{{ $velg->nama_velg }}">
-                                                </div>
-                                                <div class="down-content">
-                                                    <h4>{{ $velg->nama_velg }}</h4>
-                                                    <span>Rp. {{ number_format($velg->harga_velg, 0, ',', '.') }}</span>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <small class="text-body">Rekomendasi Velg #{{ $noVelg++ }}</small>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
-
-            {{-- === Layer Ban === --}}
-            @if(!$rekomendasiBan->isEmpty())
-                <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s">
-                    <h5 class="mb-3">Rekomendasi Ban</h5>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="loop owl-carousel">
-                                @php $noBan = 1; @endphp
-                                @foreach($rekomendasiBan as $ban)
-                                    <div class="item">
-                                        <a href="{{ route('detailEBan', ['id' => $ban->id_ban]) }}">
-                                            <div class="portfolio-item">
-                                                <div class="thumb">
-                                                    <img src="{{ asset('storage/images/ban/' . $ban->gambar_ban) }}" alt="{{ $ban->nama_ban }}">
-                                                </div>
-                                                <div class="down-content">
-                                                    <h4>{{ $ban->nama_ban }}</h4>
-                                                    <span>Rp. {{ number_format($ban->harga_ban, 0, ',', '.') }}</span>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <small class="text-body">Rekomendasi Ban #{{ $noBan++ }}</small>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
-
-            {{-- === Layer Suspensi === --}}
-            @if(!$rekomendasiSuspensi->isEmpty())
-                <div class="container-fluid wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s">
-                    <h5 class="mb-3">Rekomendasi Suspensi</h5>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="loop owl-carousel">
-                                @php $noSuspensi = 1; @endphp
-                                @foreach($rekomendasiSuspensi as $suspensi)
-                                    <div class="item">
-                                        <a href="{{ route('detailESuspensi', ['id' => $suspensi->id_suspensi]) }}">
-                                            <div class="portfolio-item">
-                                                <div class="thumb">
-                                                    <img src="{{ asset('storage/images/suspensi/' . $suspensi->gambar_suspensi) }}" alt="{{ $suspensi->nama_suspensi }}">
-                                                </div>
-                                                <div class="down-content">
-                                                    <h4>{{ $suspensi->nama_suspensi }}</h4>
-                                                    <span>Rp. {{ number_format($suspensi->harga_suspensi, 0, ',', '.') }}</span>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <small class="text-body">Rekomendasi Suspensi #{{ $noSuspensi++ }}</small>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
         @else
             {{-- Kalau data dari form ada, tampilkan data rekomendasi dari form --}}
             @php
@@ -237,8 +222,10 @@
                 </div>
              @endif
         @endif
-    </div>
 
+
+        
+    </div>
 
     <!-- Modal Rekomendasi Velg -->
     <div class="modal fade" id="productModalVelg" tabindex="-1" aria-labelledby="productModalVelgLabel" aria-hidden="true">
